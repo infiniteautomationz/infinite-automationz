@@ -1,0 +1,109 @@
+:root {
+  --ia-bg-0: #050506;
+  --ia-bg-1: #0b0b0d;
+  --ia-bg-2: #131317;
+  --ia-bg-3: #1a1a1f;
+  --ia-surface-1: #111115;
+  --ia-surface-2: #17171d;
+  --ia-surface-3: #1e1e26;
+  --ia-surface-4: #252531;
+  --ia-brand-gold: #d4af37;
+  --ia-brand-gold-hover: #b89025;
+  --ia-brand-gold-soft: rgba(212, 175, 55, 0.16);
+  --ia-brand-gold-soft-2: rgba(212, 175, 55, 0.24);
+  --ia-brand-gold-highlight: #f4d77b;
+  --ia-text-strong: #f5f5f4;
+  --ia-text: #cacac5;
+  --ia-text-soft: #a4a49e;
+  --ia-text-muted: #85857d;
+  --ia-success: #22c55e;
+  --ia-warning: #f59e0b;
+  --ia-danger: #ef4444;
+  --ia-info: #3b82f6;
+  --ia-border: rgba(255, 255, 255, 0.09);
+  --ia-border-strong: rgba(255, 255, 255, 0.18);
+  --ia-border-gold: rgba(212, 175, 55, 0.42);
+  --ia-shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.34);
+  --ia-shadow-ambient: 0 24px 62px rgba(0, 0, 0, 0.54);
+  --ia-shadow-gold: 0 16px 44px rgba(212, 175, 55, 0.16);
+  --ia-radius-xs: 8px;
+  --ia-radius-sm: 10px;
+  --ia-radius-md: 14px;
+  --ia-radius-lg: 18px;
+  --ia-radius-xl: 24px;
+  --ia-motion-150: 150ms;
+  --ia-motion-220: 220ms;
+  --ia-motion-300: 300ms;
+  --ia-ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.portal-shell {
+  background:
+    radial-gradient(1200px 620px at 85% -25%, rgba(212, 175, 55, 0.14), transparent 60%),
+    radial-gradient(900px 440px at -5% -10%, rgba(212, 175, 55, 0.09), transparent 56%),
+    radial-gradient(700px 360px at 50% 120%, rgba(255, 255, 255, 0.06), transparent 65%),
+    linear-gradient(180deg, var(--ia-bg-0), var(--ia-bg-1));
+}
+
+.portal-surface {
+  background: linear-gradient(180deg, var(--ia-surface-1), var(--ia-surface-2));
+  border: 1px solid var(--ia-border);
+  border-radius: var(--ia-radius-md);
+  box-shadow: var(--ia-shadow-soft);
+}
+
+.portal-surface-elevated {
+  background: linear-gradient(180deg, var(--ia-surface-2), var(--ia-surface-3));
+  border: 1px solid var(--ia-border-strong);
+  border-radius: var(--ia-radius-lg);
+  box-shadow: var(--ia-shadow-ambient);
+}
+
+.portal-surface-command {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 40%),
+    linear-gradient(180deg, #131318, #0e0e12);
+  border: 1px solid var(--ia-border-gold);
+  border-radius: var(--ia-radius-lg);
+  box-shadow: var(--ia-shadow-gold);
+}
+
+.portal-focus-ring {
+  outline: none;
+  box-shadow:
+    0 0 0 2px rgba(5, 5, 6, 0.95),
+    0 0 0 4px rgba(212, 175, 55, 0.74),
+    0 0 0 8px rgba(212, 175, 55, 0.2);
+}
+
+.portal-kpi-number {
+  font-family: "IBM Plex Mono", monospace;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.portal-glow-line {
+  background: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0),
+    rgba(212, 175, 55, 0.45),
+    rgba(212, 175, 55, 0)
+  );
+}
+
+.portal-subtle-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

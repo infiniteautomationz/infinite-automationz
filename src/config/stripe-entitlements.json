@@ -1,0 +1,153 @@
+{
+    "plans": [
+        {
+            "key": "bundle_digital_presence",
+            "displayName": "Digital Presence Bundle",
+            "stripe": {
+                "monthlyPriceId": "price_FILL_ME",
+                "setupFeePriceId": "price_FILL_ME"
+            },
+            "entitlements": {
+                "modules": [
+                    "WEBSITE"
+                ],
+                "features": [
+                    "CHATBOT",
+                    "LEAD_CAPTURE",
+                    "BASIC_SEO_MAINTENANCE"
+                ]
+            },
+            "onboardingChecklistKey": "onboard_digital_presence"
+        },
+        {
+            "key": "bundle_operations_scale",
+            "displayName": "Operations & Scale Bundle",
+            "stripe": {
+                "monthlyPriceId": "price_FILL_ME",
+                "setupFeePriceId": "price_FILL_ME"
+            },
+            "entitlements": {
+                "modules": [
+                    "RECEPTIONIST"
+                ],
+                "features": [
+                    "BOOKING_CAL_SYNC",
+                    "SMS_CONFIRM_REMIND",
+                    "CUSTOM_CRM_SETUP",
+                    "REVIEW_GEN"
+                ]
+            },
+            "onboardingChecklistKey": "onboard_operations_scale"
+        },
+        {
+            "key": "bundle_social_growth",
+            "displayName": "Social Growth Bundle",
+            "stripe": {
+                "monthlyPriceId": "price_FILL_ME",
+                "setupFeePriceId": "price_FILL_ME"
+            },
+            "entitlements": {
+                "modules": [
+                    "SOCIAL",
+                    "AVATAR"
+                ],
+                "features": [
+                    "DM_AUTOREPLY",
+                    "CONTENT_CALENDAR_GEN",
+                    "LEAD_NURTURE"
+                ]
+            },
+            "onboardingChecklistKey": "onboard_social_growth"
+        },
+        {
+            "key": "svc_social_media_automation",
+            "displayName": "Social Media Automation",
+            "stripe": {
+                "monthlyPriceId": "price_FILL_ME",
+                "setupFeePriceId": "price_FILL_ME"
+            },
+            "entitlements": {
+                "modules": [
+                    "SOCIAL"
+                ],
+                "features": []
+            },
+            "onboardingChecklistKey": "onboard_social"
+        },
+        {
+            "key": "svc_ai_website",
+            "displayName": "AI Website",
+            "stripe": {
+                "monthlyPriceId": "price_FILL_ME",
+                "setupFeePriceId": "price_FILL_ME"
+            },
+            "entitlements": {
+                "modules": [
+                    "WEBSITE"
+                ],
+                "features": []
+            },
+            "onboardingChecklistKey": "onboard_website"
+        },
+        {
+            "key": "svc_ai_receptionist",
+            "displayName": "AI Receptionist",
+            "stripe": {
+                "monthlyPriceId": "price_FILL_ME",
+                "setupFeePriceId": "price_FILL_ME"
+            },
+            "entitlements": {
+                "modules": [
+                    "RECEPTIONIST"
+                ],
+                "features": []
+            },
+            "onboardingChecklistKey": "onboard_receptionist"
+        },
+        {
+            "key": "svc_ai_avatar_clone",
+            "displayName": "AI Avatar/Clone",
+            "stripe": {
+                "monthlyPriceId": "price_FILL_ME",
+                "setupFeePriceId": "price_FILL_ME"
+            },
+            "entitlements": {
+                "modules": [
+                    "AVATAR"
+                ],
+                "features": []
+            },
+            "onboardingChecklistKey": "onboard_avatar"
+        },
+        {
+            "key": "svc_ai_video_ads",
+            "displayName": "AI Video Ads",
+            "stripe": {
+                "monthlyPriceId": "price_FILL_ME",
+                "setupFeePriceId": "price_FILL_ME"
+            },
+            "entitlements": {
+                "modules": [
+                    "VIDEO_ADS"
+                ],
+                "features": []
+            },
+            "onboardingChecklistKey": "onboard_video_ads"
+        },
+        {
+            "key": "svc_advanced_custom_automations",
+            "displayName": "Advanced Custom Automations",
+            "stripe": {
+                "monthlyPriceId": "price_FILL_ME",
+                "setupFeePriceId": "price_FILL_ME"
+            },
+            "entitlements": {
+                "modules": [
+                    "AUTOMATIONS"
+                ],
+                "features": []
+            },
+            "onboardingChecklistKey": "onboard_automations"
+        }
+    ]
+}

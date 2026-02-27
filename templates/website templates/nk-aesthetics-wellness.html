@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NK Aesthetics &amp; Wellness Lounge | Ridgewood, NJ</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;400;500;600&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@latest"></script>
+<style>
+body { font-family: 'DM Sans', sans-serif; color: #60381e; background-color: #fcfbf9; }
+h1, h2, h3, h4, h5, h6 { font-family: 'DM Serif Display', serif; color: #27252a; }
+.bg-brand-primary { background-color: #a5c0bb; } /* Sage */
+.bg-brand-light { background-color: #f2e9e0; } /* Cream */
+.text-brand-dark { color: #27252a; } /* Charcoal */
+.text-brand-brown { color: #60381e; } /* Brown */
+.text-brand-primary { color: #a5c0bb; }
+/* Mobile Menu Transitions */
+#mobile-menu { transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out; }
+.menu-hidden { opacity: 0; pointer-events: none; visibility: hidden; }
+.menu-visible { opacity: 1; pointer-events: auto; visibility: visible; }
+.fade-up { animation: fadeUp 0.8s ease-out forwards; opacity: 0; transform: translateY(20px); }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+.delay-100 { animation-delay: 100ms; }
+</style></head>
+<body class="antialiased selection:bg-[#a5c0bb] selection:text-white">
+
+    <!-- Announcement / Location Bar -->
+    <div class="bg-[#27252a] text-[#f2e9e0] py-2.5 relative z-50">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-2 text-[11px] uppercase tracking-wider font-medium">
+            <div class="flex items-center gap-4">
+                <span class="flex items-center gap-1.5"><i data-lucide="map-pin" class="w-3 h-3 text-[#a5c0bb]"></i> Ridgewood, NJ</span>
+                <span class="hidden sm:inline text-white/20">|</span>
+                <a href="tel:+12015006930" class="flex items-center gap-1.5 hover:text-white transition-colors"><i data-lucide="phone" class="w-3 h-3 text-[#a5c0bb]"></i> (201) 500-6930</a>
+            </div>
+            <span class="opacity-90 hidden sm:block">Grand Opening Special: Receive a $50 Gift Card for First Visit</span>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="sticky transition-all duration-300 bg-white/90 z-40 border-[#f2e9e0] border-b top-0 backdrop-blur-md">
+        <div class="flex h-20 max-w-7xl mr-auto ml-auto pr-6 pl-6 items-center justify-between">
+            <!-- Logo -->
+            <a href="#" class="flex flex-col leading-tight group">
+                <span class="font-serif text-2xl text-[#27252a] tracking-tight">NK Aesthetics</span>
+                <span class="text-[10px] uppercase tracking-[0.2em] text-[#a5c0bb] font-bold">&amp; Wellness Lounge</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden lg:flex items-center gap-8 text-[13px] font-medium uppercase tracking-widest text-[#60381e]">
+                <a href="#cosmetics" class="hover:text-[#a5c0bb] transition-colors py-2">Cosmetics</a>
+                <a href="#wellness" class="hover:text-[#a5c0bb] transition-colors py-2">Wellness</a>
+                <a href="#vip" class="hover:text-[#a5c0bb] transition-colors py-2">VIP Program</a>
+                <a href="#about" class="hover:text-[#a5c0bb] transition-colors py-2">About</a>
+                <a href="#reviews" class="hover:text-[#a5c0bb] transition-colors py-2">Reviews</a>
+            </div>
+
+            <!-- CTA Desktop -->
+            <div class="hidden lg:flex items-center gap-4">
+                <button onclick="document.getElementById('booking-section').scrollIntoView()" class="bg-[#a5c0bb] text-[#27252a] px-6 py-3 rounded-full text-[11px] font-bold uppercase tracking-widest hover:bg-[#8daea8] transition-all shadow-md active:scale-95 flex items-center gap-2">
+                    Book Visit
+                </button>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="menu-toggle" class="lg:hidden p-2 text-[#27252a] z-50 relative">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay (Hidden by Default) -->
+    <div id="mobile-menu" class="menu-hidden fixed inset-0 z-40 bg-[#f2e9e0]/98 backdrop-blur-xl flex items-center justify-center">
+        <button id="menu-close" class="absolute top-6 right-6 p-2 text-[#27252a]">
+            <i data-lucide="x" class="w-8 h-8"></i>
+        </button>
+        <div class="flex flex-col items-center gap-8 text-center">
+            <a href="#cosmetics" class="mobile-link text-2xl font-serif text-[#27252a]" onclick="closeMenu()">Cosmetics</a>
+            <a href="#wellness" class="mobile-link text-2xl font-serif text-[#27252a]" onclick="closeMenu()">Wellness</a>
+            <a href="#vip" class="mobile-link text-2xl font-serif text-[#27252a]" onclick="closeMenu()">VIP Program</a>
+            <a href="#about" class="mobile-link text-2xl font-serif text-[#27252a]" onclick="closeMenu()">About Us</a>
+            <a href="#booking-section" class="bg-[#27252a] text-white px-8 py-4 rounded-full text-sm uppercase tracking-widest mt-4" onclick="closeMenu()">Request Appointment</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-[90vh] flex items-center overflow-hidden">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://nkaestheticswl.com/wp-content/uploads/2024/08/nk-aesthetics-wellness-lounge.webp" alt="NK Aesthetics Interior" class="w-full h-full object-cover object-center">
+            <div class="bg-gray-950 opacity-40 mix-blend-hard-light absolute top-0 right-0 bottom-0 left-0">
+</div>
+        </div>
+
+        <div class="relative z-10 max-w-7xl mx-auto px-6 w-full pt-10">
+            <div class="max-w-2xl space-y-8 fade-up">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-[#f2e9e0] text-[10px] uppercase tracking-[0.2em] font-medium">
+                    <span class="w-2 h-2 rounded-full bg-[#a5c0bb]"></span>
+                    Accepting New Patients
+                </div>
+
+                <h1 class="text-5xl md:text-7xl font-medium text-white tracking-tight leading-[1.1]">
+                    Enhancing Your <br>
+                    <span class="italic text-[#a5c0bb] font-serif">Natural Beauty</span> &amp; Inner Wellness.
+                </h1>
+
+                <p class="text-lg text-[#f2e9e0]/90 font-light leading-relaxed max-w-lg border-l-2 border-[#a5c0bb] pl-6">
+                    A holistic medical lounge in Ridgewood dedicated to integrity, safety, and personalized patient care.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-4">
+                    <button onclick="document.getElementById('booking-section').scrollIntoView()" class="bg-[#a5c0bb] text-[#27252a] px-8 py-4 rounded-full text-xs uppercase tracking-widest font-bold hover:bg-[#f2e9e0] transition-all shadow-xl">
+                        Request Appointment
+                    </button>
+                    <a href="tel:+12015006930" class="bg-transparent border border-white/30 text-white px-8 py-4 rounded-full text-xs uppercase tracking-widest font-bold hover:bg-white/10 transition-colors backdrop-blur-sm flex justify-center items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4"></i> (201) 500-6930
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Trust Strip -->
+        <div class="absolute bottom-0 left-0 right-0 bg-[#f2e9e0] border-t border-[#60381e]/10 py-6">
+            <div class="max-w-7xl mx-auto px-6 flex flex-wrap justify-between gap-6 md:gap-12 items-center text-[#60381e]">
+                <div class="flex items-center gap-3">
+                    <div class="flex text-[#a5c0bb]">
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                        <i data-lucide="star" class="w-4 h-4 fill-current"></i>
+                    </div>
+                    <span class="text-xs font-bold uppercase tracking-wider">5-Star Rated Care</span>
+                </div>
+                <div class="hidden md:flex items-center gap-3">
+                    <i data-lucide="shield-check" class="w-5 h-5 text-[#a5c0bb]"></i>
+                    <span class="text-xs font-bold uppercase tracking-wider">Licensed Medical Team</span>
+                </div>
+                <div class="flex items-center gap-3">
+                    <i data-lucide="map" class="w-5 h-5 text-[#a5c0bb]"></i>
+                    <span class="text-xs font-bold uppercase tracking-wider">Ridgewood, NJ</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Cosmetic Services -->
+    <section id="cosmetics" class="py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16">
+                <span class="text-[#a5c0bb] text-xs font-bold tracking-widest uppercase block mb-3">Service Menu</span>
+                <h2 class="text-4xl md:text-5xl font-medium text-[#27252a] tracking-tight">Cosmetic Treatments</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <a href="#" class="group p-8 bg-[#fcfbf9] rounded-[2rem] border border-[#f2e9e0] hover:border-[#a5c0bb] transition-all hover:shadow-lg">
+                    <div class="w-12 h-12 bg-[#f2e9e0] rounded-full flex items-center justify-center text-[#60381e] mb-6 group-hover:bg-[#a5c0bb] transition-colors">
+                        <i data-lucide="smile" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-[#27252a] mb-2">Neurotoxins</h3>
+                    <p class="text-sm text-[#60381e]/70 leading-relaxed mb-4">FDA-approved wrinkle reducers (Botox) to smooth fine lines and refresh your look.</p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#a5c0bb] flex items-center gap-2 group-hover:translate-x-2 transition-transform">Learn More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+                </a>
+
+                <!-- Card 2 -->
+                <a href="#" class="group p-8 bg-[#fcfbf9] rounded-[2rem] border border-[#f2e9e0] hover:border-[#a5c0bb] transition-all hover:shadow-lg">
+                    <div class="w-12 h-12 bg-[#f2e9e0] rounded-full flex items-center justify-center text-[#60381e] mb-6 group-hover:bg-[#a5c0bb] transition-colors">
+                        <i data-lucide="syringe" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-[#27252a] mb-2">Dermal Fillers</h3>
+                    <p class="text-sm text-[#60381e]/70 leading-relaxed mb-4">Restore volume and contour features for a youthful, balanced appearance.</p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#a5c0bb] flex items-center gap-2 group-hover:translate-x-2 transition-transform">Learn More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+                </a>
+
+                <!-- Card 3 -->
+                <a href="#" class="group p-8 bg-[#fcfbf9] rounded-[2rem] border border-[#f2e9e0] hover:border-[#a5c0bb] transition-all hover:shadow-lg">
+                    <div class="w-12 h-12 bg-[#f2e9e0] rounded-full flex items-center justify-center text-[#60381e] mb-6 group-hover:bg-[#a5c0bb] transition-colors">
+                        <i data-lucide="sparkles" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-[#27252a] mb-2">Microneedling</h3>
+                    <p class="text-sm text-[#60381e]/70 leading-relaxed mb-4">Available with PRP, Salmon DNA, or Exosomes to stimulate collagen.</p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#a5c0bb] flex items-center gap-2 group-hover:translate-x-2 transition-transform">Learn More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+                </a>
+
+                <!-- Card 4 -->
+                <a href="#" class="group p-8 bg-[#fcfbf9] rounded-[2rem] border border-[#f2e9e0] hover:border-[#a5c0bb] transition-all hover:shadow-lg">
+                    <div class="w-12 h-12 bg-[#f2e9e0] rounded-full flex items-center justify-center text-[#60381e] mb-6 group-hover:bg-[#a5c0bb] transition-colors">
+                        <i data-lucide="scissors" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-[#27252a] mb-2">Hair Restoration</h3>
+                    <p class="text-sm text-[#60381e]/70 leading-relaxed mb-4">Non-surgical solutions to promote hair growth and thickness.</p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#a5c0bb] flex items-center gap-2 group-hover:translate-x-2 transition-transform">Learn More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+                </a>
+
+                <!-- Card 5 -->
+                <a href="#" class="group p-8 bg-[#fcfbf9] rounded-[2rem] border border-[#f2e9e0] hover:border-[#a5c0bb] transition-all hover:shadow-lg">
+                    <div class="w-12 h-12 bg-[#f2e9e0] rounded-full flex items-center justify-center text-[#60381e] mb-6 group-hover:bg-[#a5c0bb] transition-colors">
+                        <i data-lucide="droplets" class="w-6 h-6"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-[#27252a] mb-2">VI Peel</h3>
+                    <p class="text-sm text-[#60381e]/70 leading-relaxed mb-4">Medium-depth chemical peel to improve tone, texture, and clarity.</p>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#a5c0bb] flex items-center gap-2 group-hover:translate-x-2 transition-transform">Learn More <i data-lucide="arrow-right" class="w-3 h-3"></i></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wellness Services -->
+    <section id="wellness" class="py-24 bg-[#f2e9e0] relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16 md:text-right">
+                <span class="text-[#60381e] text-xs font-bold tracking-widest uppercase block mb-3">Holistic Health</span>
+                <h2 class="text-4xl md:text-5xl font-medium text-[#27252a] tracking-tight">Wellness Treatments</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:-translate-y-1 transition-transform duration-300">
+                    <h3 class="text-lg font-bold text-[#27252a] mb-2">Medical Weight Loss</h3>
+                    <p class="text-sm text-[#60381e]/70">Physician-guided programs for sustainable results.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:-translate-y-1 transition-transform duration-300">
+                    <h3 class="text-lg font-bold text-[#27252a] mb-2">Hormone Therapy</h3>
+                    <p class="text-sm text-[#60381e]/70">Bio-identical hormone replacement for balance.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:-translate-y-1 transition-transform duration-300">
+                    <h3 class="text-lg font-bold text-[#27252a] mb-2">IV Infusions</h3>
+                    <p class="text-sm text-[#60381e]/70">Hydration and vitamin blends for optimal wellness.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm hover:-translate-y-1 transition-transform duration-300">
+                    <h3 class="text-lg font-bold text-[#27252a] mb-2">Peptide Therapy</h3>
+                    <p class="text-sm text-[#60381e]/70">Advanced cellular signaling for health optimization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About / Values -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
+            <div class="space-y-8">
+                <h2 class="text-4xl font-medium text-[#27252a] tracking-tight">Our Values: <br><span class="font-serif italic text-[#a5c0bb]">Integrity &amp; Trust</span></h2>
+                <div class="space-y-6 text-[#60381e] font-light leading-relaxed text-lg">
+                    <p>At NK Aesthetics &amp; Wellness Lounge, we are committed to holistic well-being with a focus on integrity and personalized care. We provide transparent, safe, and high-quality treatments to enhance both physical appearance and internal health.</p>
+                    <p>Our team of skilled professionals ensures that every client receives tailored, patient-centered service.</p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 mt-8">
+                    <div class="flex items-center gap-3 p-4 bg-[#fcfbf9] rounded-lg">
+                        <i data-lucide="heart-handshake" class="w-6 h-6 text-[#a5c0bb]"></i>
+                        <span class="text-sm font-bold text-[#27252a]">Patient-Centered</span>
+                    </div>
+                    <div class="flex items-center gap-3 p-4 bg-[#fcfbf9] rounded-lg">
+                        <i data-lucide="shield-check" class="w-6 h-6 text-[#a5c0bb]"></i>
+                        <span class="text-sm font-bold text-[#27252a]">Safety First</span>
+                    </div>
+                </div>
+            </div>
+            <!-- Image Placeholder -->
+            <div class="rounded-3xl overflow-hidden shadow-2xl h-[500px]">
+                <img src="https://nkaestheticswl.com/wp-content/uploads/2024/08/nk-aesthetics-wellness-lounge.webp" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+            </div>
+        </div>
+    </section>
+
+    <!-- VIP / Offer -->
+    <section class="text-[#f2e9e0] bg-[#27252a] pt-4 pb-4" id="vip">
+        <div class="text-center max-w-4xl mt-4 mr-auto mb-4 ml-auto">
+            <div class="inline-block p-3 rounded-full bg-white/10 mb-6">
+                <i data-lucide="gift" class="w-8 h-8 text-[#a5c0bb]"></i>
+            </div>
+
+            <p class="text-lg md:text-xl font-light text-white/80 mb-10">Receive a complimentary <span class="text-[#a5c0bb] font-bold">$50 Gift Card</span> to be applied toward your first visit at NK Aesthetics.</p>
+            <a href="#booking-section" class="inline-block bg-[#f2e9e0] text-[#27252a] px-10 py-4 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-[#a5c0bb] transition-colors">Claim Your Gift</a>
+        </div>
+    </section>
+
+    <!-- Locations & Hours -->
+    <section class="py-24 bg-[#fcfbf9]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Location Details -->
+                <div class="">
+                    <h2 class="text-3xl font-serif text-[#27252a] mb-8">Visit The Lounge</h2>
+
+                    <div class="space-y-8">
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 bg-[#f2e9e0] rounded-full flex items-center justify-center shrink-0">
+                                <i data-lucide="map-pin" class="w-5 h-5 text-[#60381e]"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-[#27252a] mb-1">Ridgewood</h3>
+                                <p class="text-[#60381e] text-sm leading-relaxed">
+                                    235 E Ridgewood Ave, Suite 8<br>
+                                    Ridgewood, NJ 07451
+                                </p>
+                                <a href="https://maps.google.com/?q=235+E+Ridgewood+Ave+Suite+8+Ridgewood+NJ+07451" target="_blank" class="text-[#a5c0bb] text-xs font-bold uppercase tracking-wider mt-2 inline-block border-b border-[#a5c0bb] pb-0.5">Get Directions</a>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 bg-[#f2e9e0] rounded-full flex items-center justify-center shrink-0">
+                                <i data-lucide="clock" class="w-5 h-5 text-[#60381e]"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-[#27252a] mb-1">Hours</h3>
+                                <table class="text-sm text-[#60381e] w-full max-w-xs">
+                                    <tbody><tr><td class="py-1">Monday</td><td class="text-right">9:30 am – 2 pm</td></tr>
+                                    <tr><td class="py-1 opacity-50">Tuesday</td><td class="text-right opacity-50">Closed</td></tr>
+                                    <tr><td class="py-1">Wednesday</td><td class="text-right">10 am – 4 pm</td></tr>
+                                    <tr><td class="py-1">Thursday</td><td class="text-right">10 am – 6 pm</td></tr>
+                                    <tr><td class="py-1">Friday</td><td class="text-right">10 am – 4 pm</td></tr>
+                                    <tr><td class="py-1 opacity-50">Sat/Sun</td><td class="text-right opacity-50">Closed</td></tr>
+                                </tbody></table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Booking Form -->
+                <div id="booking-section" class="bg-white p-8 md:p-10 rounded-[2rem] shadow-xl border border-[#f2e9e0]">
+                    <h3 class="text-2xl font-serif text-[#27252a] mb-6">Request Appointment</h3>
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Thank you! Your request has been sent. Our team will contact you shortly to confirm.');">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="text" placeholder="First Name" class="w-full p-4 bg-[#fcfbf9] rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#a5c0bb]" required="">
+                            <input type="text" placeholder="Last Name" class="w-full p-4 bg-[#fcfbf9] rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#a5c0bb]" required="">
+                        </div>
+                        <input type="tel" placeholder="Phone Number" class="w-full p-4 bg-[#fcfbf9] rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#a5c0bb]" required="">
+                        <input type="email" placeholder="Email Address" class="w-full p-4 bg-[#fcfbf9] rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#a5c0bb]" required="">
+
+                        <select class="w-full p-4 bg-[#fcfbf9] rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#a5c0bb] text-[#60381e]">
+                            <option value="">Select Treatment of Interest</option>
+                            <option value="neurotoxins">Neurotoxins (Botox)</option>
+                            <option value="filler">Dermal Filler</option>
+                            <option value="microneedling">Microneedling</option>
+                            <option value="vi-peel">VI Peel</option>
+                            <option value="weight-loss">Medical Weight Loss</option>
+                            <option value="hormone">Hormone Therapy</option>
+                            <option value="iv">IV Infusion</option>
+                        </select>
+
+                        <textarea placeholder="How can we help you?" rows="3" class="w-full p-4 bg-[#fcfbf9] rounded-xl text-sm outline-none focus:ring-2 focus:ring-[#a5c0bb]"></textarea>
+
+                        <button type="submit" class="w-full bg-[#27252a] text-white py-4 rounded-xl font-bold uppercase tracking-widest text-xs hover:bg-[#a5c0bb] hover:text-[#27252a] transition-colors">
+                            Submit Request
+                        </button>
+                        <p class="text-[10px] text-center text-gray-400 mt-2">Connects to clinic email autoresponder.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews" class="py-24 bg-white border-t border-[#f2e9e0]">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-3xl font-serif text-[#27252a] mb-12">Patient Stories</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="p-8 bg-[#fcfbf9] rounded-2xl">
+                    <div class="flex text-[#a5c0bb] justify-center mb-4">★★★★★</div>
+                    <p class="text-[#60381e] text-sm leading-relaxed italic">"Dr. O was amazing. I had the VI Peel... he was so understanding and explained the procedure thoroughly."</p>
+                    <p class="mt-4 font-bold text-xs uppercase tracking-wide text-[#27252a]">- Shila P.</p>
+                </div>
+                <div class="p-8 bg-[#fcfbf9] rounded-2xl">
+                    <div class="flex text-[#a5c0bb] justify-center mb-4">★★★★★</div>
+                    <p class="text-[#60381e] text-sm leading-relaxed italic">"Best Wellness lounge I've been to. I was treated like a true VIP. I highly recommend NK aesthetics!"</p>
+                    <p class="mt-4 font-bold text-xs uppercase tracking-wide text-[#27252a]">- Mitchell O.</p>
+                </div>
+                <div class="p-8 bg-[#fcfbf9] rounded-2xl">
+                    <div class="flex text-[#a5c0bb] justify-center mb-4">★★★★★</div>
+                    <p class="text-[#60381e] text-sm leading-relaxed italic">"Wow! Exactly the type of place I was looking for! Dr. O was thorough in explaining everything."</p>
+                    <p class="mt-4 font-bold text-xs uppercase tracking-wide text-[#27252a]">- Anjali J.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#27252a] text-[#f2e9e0]/60 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 border-b border-white/10 pb-12">
+                <div class="col-span-1 md:col-span-2 space-y-6">
+                    <a href="#" class="block text-2xl font-serif text-white tracking-tight">NK Aesthetics.</a>
+                    <p class="text-sm leading-relaxed max-w-sm">
+                        Committed to holistic well-being with a focus on integrity and personalized care.
+                    </p>
+                    <div class="flex gap-4 pt-2">
+                        <a href="https://instagram.com/nkaestheticswl/" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#a5c0bb] hover:text-[#27252a] transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                        <a href="https://www.facebook.com/profile.php?id=61564147351797" target="_blank" class="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-[#a5c0bb] hover:text-[#27252a] transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold uppercase text-xs tracking-widest mb-6">Explore</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li><a href="#cosmetics" class="hover:text-white transition-colors">Cosmetics</a></li>
+                        <li><a href="#wellness" class="hover:text-white transition-colors">Wellness</a></li>
+                        <li><a href="#vip" class="hover:text-white transition-colors">VIP Program</a></li>
+                        <li><a href="https://nkaestheticswl.com/privacy-policy/" class="hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-white font-bold uppercase text-xs tracking-widest mb-6">Contact</h4>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-4 h-4 mt-0.5 text-[#a5c0bb]"></i>
+                            <span>235 E Ridgewood Ave, Ste 8<br>Ridgewood, NJ 07451</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-4 h-4 text-[#a5c0bb]"></i>
+                            <span>(201) 500-6930</span>
+                        </li>
+                        <li class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-4 h-4 text-[#a5c0bb]"></i>
+                            <span>NKAestheticsWL@gmail.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="pt-8 text-center md:text-left text-xs">
+                <p>© 2024 NK Aesthetics &amp; Wellness Lounge. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Booking Floating Button Mobile -->
+    <div class="fixed bottom-6 right-6 z-30 md:hidden">
+        <button onclick="document.getElementById('booking-section').scrollIntoView()" class="bg-[#a5c0bb] text-[#27252a] p-4 rounded-full shadow-2xl hover:scale-105 transition-transform border border-white/20">
+            <i data-lucide="calendar-days" class="w-6 h-6"></i>
+        </button>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        // Mobile Menu Logic
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuClose = document.getElementById('menu-close');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function toggleMenu() {
+            if (mobileMenu.classList.contains('menu-hidden')) {
+                mobileMenu.classList.remove('menu-hidden');
+                mobileMenu.classList.add('menu-visible');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                closeMenu();
+            }
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('menu-visible');
+            mobileMenu.classList.add('menu-hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        menuToggle.addEventListener('click', toggleMenu);
+        menuClose.addEventListener('click', closeMenu);
+    </script>
+
+
+</body></html>

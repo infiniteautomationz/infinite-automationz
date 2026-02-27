@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulseframe Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a1a 100%);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body class="text-white">
+<div
+  class="bg-gradient-to-b from-white/5 to-black/20 w-full max-w-5xl rounded-3xl mr-auto ml-auto pt-3 pr-3 pb-3 pl-3 shadow-2xl backdrop-blur m-12"
+  style="box-shadow: 0 30px 60px rgba(0,0,0,0.45), 0 10px 20px rgba(0,0,0,0.3), inset 0 1px 1px rgba(255,255,255,0.15); position: relative; --border-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1)); --border-radius-before: 24px">
+  <div class="rounded-2xl"
+    style="background: linear-gradient(135deg, rgba(22,22,22,0.98), rgba(12,12,12,0.98));  backdrop-filter: saturate(1.25) blur(4px);  -webkit-backdrop-filter: saturate(1.25) blur(4px); position: relative; --border-gradient: linear-gradient(135deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.1)); --border-radius-before: 16px">
+    <!-- Top bar -->
+    <div class="flex border-white/10 border-b pt-3 pr-4 pb-3 pl-4 items-center justify-between">
+      <div class="flex items-center gap-3">
+        <span class="inline-flex h-8 w-8 items-center justify-center rounded-md ring-1 ring-white/10" style="background: linear-gradient(135deg, rgba(36,36,36,0.85), rgba(20,20,20,0.85)); box-shadow: inset 0 1px 1px rgba(255,255,255,0.06);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-white/90"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" class=""></path><path d="M20 2v4" class=""></path><path d="M22 4h-4" class=""></path><circle cx="4" cy="20" r="2" class=""></circle></svg>
+              </span>
+        <span class="text-sm font-medium tracking-tight font-sans">Pulseframe</span>
+      </div>
+      <div
+        class="hidden md:flex items-center gap-2 rounded-full bg-white/5 px-3 py-2 ring-1 ring-white/10 w-full max-w-md">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+          class="h-4 w-4 text-white/60">
+          <path d="m21 21-4.34-4.34" class=""></path>
+          <circle cx="11" cy="11" r="8" class=""></circle>
+        </svg>
+        <input class="w-full bg-transparent text-sm placeholder-white/40 focus:outline-none" placeholder="Search tasks, docs, teammates…">
+      </div>
+      <div class="flex items-center gap-3">
+        <button class="inline-flex h-9 w-9 items-center justify-center rounded-full ring-1 ring-white/15 hover:bg-white/10">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4 text-white/80"><path d="M10.268 21a2 2 0 0 0 3.464 0" class=""></path><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326" class=""></path></svg>
+              </button>
+        <div class="flex items-center gap-2 rounded-full bg-white/5 px-2 py-1 ring-1 ring-white/10">
+          <img class="h-7 w-7 rounded-full object-cover" src="https://images.unsplash.com/photo-1635151227785-429f420c6b9d?w=1080&amp;q=80" alt="Studio Portrait of Stylish Woman in Black Blazer">
+          <div class="hidden sm:block">
+            <div class="text-xs font-medium font-sans">Maya Ortiz</div>
+            <div class="text-[10px] text-white/60 font-sans">Owner</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Content -->
+    <div class="grid grid-cols-1 gap-4 px-4 py-4 md:grid-cols-12">
+      <aside class="md:col-span-3">
+        <ul class="space-y-1 text-sm">
+          <li class="">
+            <a class="flex items-center justify-between rounded-lg px-3 py-2 bg-white/5 ring-1 ring-white/10" href="#">
+              <span class="text-white/90 font-sans">Overview</span>
+              <span class="text-[10px] text-white/50 font-sans">12</span>
+            </a>
+          </li>
+          <li class=""><a
+              class="flex items-center justify-between rounded-lg px-3 py-2 text-white/70 hover:bg-white/5 hover:text-white transition font-sans"
+              href="#"><span class="">Tasks</span><span class="text-[10px] text-white/40">34</span></a></li>
+          <li><a
+              class="flex items-center justify-between rounded-lg px-3 py-2 text-white/70 hover:bg-white/5 hover:text-white transition font-sans"
+              href="#"><span>Sprints</span><span class="text-[10px] text-white/40">5</span></a></li>
+          <li><a
+              class="flex items-center justify-between rounded-lg px-3 py-2 text-white/70 hover:bg-white/5 hover:text-white transition font-sans"
+              href="#"><span>Docs</span><span class="text-[10px] text-white/40">18</span></a></li>
+        </ul>
+        <div class="mt-4 pt-4 border-t border-white/10">
+          <p class="text-xs text-white/50 mb-2 px-3 font-sans">Team</p>
+          <div class="space-y-1">
+            <a class="flex items-center gap-2 rounded-lg px-3 py-2 text-white/70 hover:bg-white/5 hover:text-white transition"
+              href="#">
+              <img class="h-6 w-6 rounded-full object-cover" src="https://images.unsplash.com/photo-1635151227785-429f420c6b9d?w=1080&amp;q=80" alt="">
+              <span class="text-sm font-sans">Maya Ortiz</span>
+            </a>
+            <a class="flex items-center gap-2 rounded-lg px-3 py-2 text-white/70 hover:bg-white/5 hover:text-white transition"
+              href="#">
+              <img class="h-6 w-6 rounded-full object-cover" src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?w=1080&amp;q=80" alt="">
+              <span class="text-sm font-sans">Alex Chen</span>
+            </a>
+            <a class="flex items-center gap-2 rounded-lg px-3 py-2 text-white/70 hover:bg-white/5 hover:text-white transition"
+              href="#">
+              <img class="h-6 w-6 rounded-full object-cover" src="https://images.unsplash.com/photo-1642615835477-d303d7dc9ee9?w=1080&amp;q=80" alt="">
+              <span class="text-sm font-sans">Jordan Lee</span>
+            </a>
+          </div>
+        </div>
+      </aside>
+      <div class="md:col-span-9">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="text-base font-medium tracking-tight font-sans">Active Projects</h3>
+          <button class="inline-flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2 text-xs ring-1 ring-white/15 hover:bg-white/15 font-sans">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="h-3.5 w-3.5"><path d="M5 12h14" class=""></path><path d="M12 5v14" class=""></path></svg>
+                  New Project
+                </button>
+        </div>
+        <div class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 mb-4">
+          <div class="rounded-xl bg-white/5 p-4 ring-1 ring-white/10 hover:bg-white/8 transition">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <div
+                  class="h-8 w-8 rounded-lg bg-gradient-to-br from-emerald-400/20 to-emerald-600/20 ring-1 ring-emerald-400/30 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="h-4 w-4 text-emerald-400">
+                    <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4" class=""></path>
+                    <path d="M3 5v14a2 2 0 0 0 2 2h16v-5" class=""></path>
+                    <path d="M18 12a2 2 0 0 0 0 4h4v-4Z" class=""></path>
+                  </svg>
+                </div>
+                <p class="text-sm font-medium text-white/90 font-sans">Atlas Redesign</p>
+              </div>
+            </div>
+            <span class="inline-block text-[10px] rounded-full bg-emerald-400/15 px-2 py-0.5 text-emerald-300 ring-1 ring-emerald-300/30 font-sans mb-3">On track</span>
+            <div class="mt-3 pt-3 border-t border-white/10">
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="text-white/60 font-sans">Progress</span>
+                <span class="text-white/90 font-sans">74%</span>
+              </div>
+              <div class="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                <div class="h-full bg-emerald-400 rounded-full" style="width: 74%"></div>
+              </div>
+              <p class="mt-2 text-xs text-white/50 font-sans">46 open • 128 done</p>
+            </div>
+          </div>
+          <div class="rounded-xl bg-white/5 p-4 ring-1 ring-white/10 hover:bg-white/8 transition">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <div
+                  class="h-8 w-8 rounded-lg bg-gradient-to-br from-amber-400/20 to-amber-600/20 ring-1 ring-amber-400/30 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class=""
+                    style="color: rgb(251, 191, 36);">
+                    <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"
+                      class=""></path>
+                    <path d="M9 13a4.5 4.5 0 0 0 3-4" class=""></path>
+                    <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5" class=""></path>
+                    <path d="M3.477 10.896a4 4 0 0 1 .585-.396" class=""></path>
+                    <path d="M6 18a4 4 0 0 1-1.967-.516" class=""></path>
+                    <path d="M12 13h4" class=""></path>
+                    <path d="M12 18h6a2 2 0 0 1 2 2v1" class=""></path>
+                    <path d="M12 8h8" class=""></path>
+                    <path d="M16 8V5a2 2 0 0 1 2-2" class=""></path>
+                    <circle cx="16" cy="13" r=".5" class=""></circle>
+                    <circle cx="18" cy="3" r=".5" class=""></circle>
+                    <circle cx="20" cy="21" r=".5" class=""></circle>
+                    <circle cx="20" cy="8" r=".5" class=""></circle>
+                  </svg>
+                </div>
+                <p class="text-sm font-medium text-white/90 font-sans">Relay API</p>
+              </div>
+            </div>
+            <span class="inline-block text-[10px] rounded-full bg-amber-400/15 px-2 py-0.5 text-amber-300 ring-1 ring-amber-300/30 font-sans mb-3">Review</span>
+            <div class="mt-3 pt-3 border-t border-white/10">
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="text-white/60 font-sans">Progress</span>
+                <span class="text-white/90 font-sans">80%</span>
+              </div>
+              <div class="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                <div class="h-full bg-amber-400 rounded-full" style="width: 80%"></div>
+              </div>
+              <p class="mt-2 text-xs text-white/50 font-sans">19 open • 74 done</p>
+            </div>
+          </div>
+          <div class="hover:bg-white/8 transition bg-white/5 rounded-xl ring-white/10 ring-1 pt-4 pr-4 pb-4 pl-4">
+            <div class="flex items-center justify-between mb-3">
+              <div class="flex items-center gap-2">
+                <div
+                  class="h-8 w-8 rounded-lg bg-gradient-to-br from-sky-400/20 to-sky-600/20 ring-1 ring-sky-400/30 flex items-center justify-center">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                    class="h-4 w-4 text-sky-400">
+                    <path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z" class=""></path>
+                  </svg>
+                </div>
+                <p class="text-sm font-medium text-white/90 font-sans">Edge Deploy</p>
+              </div>
+            </div>
+            <span class="inline-block text-[10px] rounded-full bg-sky-400/15 px-2 py-0.5 text-sky-300 ring-1 ring-sky-300/30 font-sans mb-3">Planning</span>
+            <div class="mt-3 pt-3 border-t border-white/10">
+              <div class="flex items-center justify-between text-xs mb-1">
+                <span class="text-white/60 font-sans">Progress</span>
+                <span class="text-white/90 font-sans">25%</span>
+              </div>
+              <div class="h-1.5 w-full rounded-full bg-white/10 overflow-hidden">
+                <div class="h-full bg-sky-400 rounded-full" style="width: 25%"></div>
+              </div>
+              <p class="mt-2 text-xs text-white/50 font-sans">7 open • 21 done</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <div class="flex items-center justify-between mb-3">
+            <h3 class="text-sm font-medium tracking-tight text-white/90 font-sans">Recent Activity</h3>
+            <a href="#" class="text-xs text-white/60 hover:text-white/90 font-sans">View all</a>
+          </div>
+          <div class="space-y-2">
+            <div class="flex items-start gap-3 rounded-lg bg-white/5 p-3 ring-1 ring-white/5">
+              <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1635151227785-429f420c6b9d?w=1080&amp;q=80" alt="">
+              <div class="flex-1 min-w-0">
+                <p class="text-sm text-white/90 font-sans"><span class="font-medium">Maya Ortiz</span> completed
+                  <span class="text-white/70">Homepage redesign</span>
+                </p>
+                <p class="text-xs text-white/50 mt-1 font-sans">2 hours ago</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3 rounded-lg bg-white/5 p-3 ring-1 ring-white/5">
+              <img class="h-8 w-8 rounded-full object-cover" src="https://images.unsplash.com/photo-1621619856624-42fd193a0661?w=1080&amp;q=80" alt="">
+              <div class="flex-1 min-w-0">
+                <p class="text-sm text-white/90 font-sans"><span class="font-medium">Alex Chen</span> added 3 tasks to
+                  <span class="text-white/70">Relay API</span>
+                </p>
+                <p class="text-xs text-white/50 mt-1 font-sans">5 hours ago</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

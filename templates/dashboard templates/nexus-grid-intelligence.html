@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus - Grid Intelligence</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div
+  style="--color-paper: #0a0f1d; --color-ink: #f0f9ff; --color-ink-70: #94a3b8; --color-ink-50: #64748b; --color-accent: #38bdf8; --font-sans: 'Inter', system-ui, sans-serif; background-color: var(--color-paper); color: var(--color-ink); font-family: var(--font-sans); height: 100vh; display: flex; overflow: hidden; background-image: radial-gradient(rgba(56, 189, 248, 0.05) 1px, transparent 1px); background-size: 32px 32px;">
+  <style>
+    .sidebar {
+      width: 280px;
+      border-right: 1px solid rgba(56, 189, 248, 0.1);
+      background: rgba(10, 15, 29, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 50;
+    }
+
+    .eyebrow {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-weight: 600;
+      color: var(--color-ink-50);
+    }
+
+    .nav-item {
+      transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+      border-left: 2px solid transparent;
+      opacity: 0.6;
+      cursor: pointer;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      opacity: 1;
+      background: rgba(56, 189, 248, 0.05);
+      border-left-color: var(--color-accent);
+    }
+
+    .glass-panel {
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(56, 189, 248, 0.1);
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .glass-panel:hover {
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+
+    .glow-bar {
+      height: 8px;
+      background: rgba(56, 189, 248, 0.1);
+      border-radius: 99px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-primary {
+      border: 1px solid var(--color-accent);
+      color: var(--color-accent);
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      background: var(--color-accent);
+      color: var(--color-paper);
+    }
+
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+  </style>
+
+  <aside class="sidebar h-full flex flex-col p-8 flex-shrink-0">
+    <div class="mb-12">
+      <div class="text-2xl font-bold tracking-tight text-[#38bdf8]">Nexus</div>
+      <div class="eyebrow mt-1">Grid Intelligence</div>
+    </div>
+
+    <nav class="flex-1 space-y-1 -mx-4">
+      <div class="px-4 py-3 nav-item flex items-center gap-4">
+        <span class="font-mono text-[10px] opacity-40">01</span>
+        <span class="eyebrow !text-inherit">Nodes</span>
+      </div>
+      <div class="px-4 py-3 nav-item flex items-center gap-4">
+        <span class="font-mono text-[10px] opacity-40">02</span>
+        <span class="eyebrow !text-inherit">Telemetry</span>
+      </div>
+      <div class="px-4 py-3 nav-item active flex items-center gap-4">
+        <span class="font-mono text-[10px] text-[#38bdf8]">03</span>
+        <span class="eyebrow !text-[#38bdf8]">Optimization</span>
+        <div class="ml-auto w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse"></div>
+      </div>
+      <div class="px-4 py-3 nav-item flex items-center gap-4">
+        <span class="font-mono text-[10px] opacity-40">04</span>
+        <span class="eyebrow !text-inherit">Security</span>
+      </div>
+      <div class="px-4 py-3 nav-item flex items-center gap-4">
+        <span class="font-mono text-[10px] opacity-40">05</span>
+        <span class="eyebrow !text-inherit">Storage</span>
+      </div>
+    </nav>
+
+    <div class="mt-auto pt-8 border-t border-white/5">
+      <div class="eyebrow mb-2">Cluster Alpha</div>
+      <div class="font-mono text-xs opacity-60 mb-4">NX-99-PROD</div>
+      <div class="flex items-center gap-2 text-[10px] uppercase tracking-widest text-[#38bdf8]">
+        <span class="w-1.5 h-1.5 rounded-full bg-[#38bdf8] animate-pulse"></span>
+        Synchronized
+      </div>
+    </div>
+  </aside>
+
+  <main class="flex-1 h-full overflow-y-auto no-scrollbar p-12 lg:p-16 relative">
+    <header class="max-w-5xl mb-16">
+      <h1 class="text-5xl lg:text-7xl font-light leading-[1.1] mb-8 tracking-tight">
+        Manage peak <span class="text-[#38bdf8] font-semibold italic">energy loads</span><br> with precision.
+      </h1>
+      <div class="flex items-center gap-8">
+        <a href="#" class="btn-primary px-8 py-4 rounded-full text-xs font-bold tracking-widest uppercase">
+          Launch Simulation →
+        </a>
+        <p class="text-sm text-[#64748b]">Real-time adjustment across 42 sectors.</p>
+      </div>
+    </header>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl">
+      <div class="lg:col-span-2 glass-panel rounded-3xl p-8 flex flex-col justify-between min-h-[280px]">
+        <div class="flex justify-between items-start">
+          <div>
+            <div class="eyebrow mb-2">Global Load Capacity</div>
+            <div class="text-5xl font-light text-[#38bdf8]">
+              842<span class="text-xl opacity-40 ml-1">GW/h</span></div>
+          </div>
+          <div class="h-10 w-10 rounded-full border border-[#38bdf8]/20 flex items-center justify-center">
+            <svg class="w-5 h-5 text-[#38bdf8]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z">
+              </path>
+            </svg>
+          </div>
+        </div>
+        <div>
+          <p class="text-lg text-[#94a3b8] max-w-md">
+            Neural balancing protocols automatically redistribute surplus energy to high-demand regions in milliseconds.
+          </p>
+        </div>
+      </div>
+
+      <div class="glass-panel rounded-3xl p-8 flex flex-col">
+        <div class="eyebrow mb-6">Synchronization State</div>
+        <div class="space-y-6">
+          <div class="space-y-2">
+            <div class="flex justify-between text-[10px] uppercase opacity-60">
+              <span>Load Balancing</span>
+              <span>92%</span>
+            </div>
+            <div class="glow-bar w-full">
+              <div class="absolute inset-0 bg-[#38bdf8] w-[92%] rounded-full shadow-[0_0_15px_rgba(56,189,248,0.3)]">
+              </div>
+            </div>
+          </div>
+          <div class="space-y-2">
+            <div class="flex justify-between text-[10px] uppercase opacity-60">
+              <span>Node Latency</span>
+              <span>100%</span>
+            </div>
+            <div class="glow-bar w-full">
+              <div class="absolute inset-0 bg-[#38bdf8]/40 w-full rounded-full"></div>
+            </div>
+          </div>
+          <div class="pt-4 flex items-center gap-3">
+            <div class="w-2 h-2 bg-[#38bdf8] rounded-full animate-ping"></div>
+            <span class="text-xs font-mono text-[#38bdf8]">Monitoring 12.4M sensors...</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="glass-panel rounded-3xl p-8">
+        <div class="eyebrow mb-4">Network Resilience</div>
+        <div class="flex gap-1.5 mb-6">
+          <div class="h-1 flex-1 bg-[#38bdf8] rounded-full"></div>
+          <div class="h-1 flex-1 bg-[#38bdf8] rounded-full"></div>
+          <div class="h-1 flex-1 bg-[#38bdf8] rounded-full"></div>
+          <div class="h-1 flex-1 bg-[#38bdf8]/20 rounded-full"></div>
+        </div>
+        <p class="text-xs leading-relaxed opacity-60 italic">
+          "Operational uptime maintained at 99.99% through automated failover and kinetic storage management."
+        </p>
+      </div>
+
+      <div class="glass-panel rounded-3xl p-8 flex flex-col justify-center border-dashed">
+        <div class="text-center">
+          <div class="eyebrow mb-2">Carbon Offset</div>
+          <div class="text-3xl font-mono text-[#38bdf8]/80">14.2M Tons</div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="fixed top-1/2 left-2/3 -translate-x-1/2 -translate-y-1/2 w-[60vw] h-[60vw] bg-[#38bdf8] opacity-[0.03] blur-[150px] rounded-full pointer-events-none -z-10">
+    </div>
+  </main>
+</div>
+</body>
+</html>

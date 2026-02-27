@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Justin Robinson CRM Mock</title>
+  <style>
+    :root {
+      --bg: #090a0d;
+      --panel: #101216;
+      --line: #20232a;
+      --muted: #a3a7b2;
+      --text: #eef0f4;
+      --red: #df3f31;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Inter", "Segoe UI", sans-serif; background: radial-gradient(circle at top, #141920 0%, var(--bg) 45%); color: var(--text); }
+    .shell { display: grid; grid-template-columns: 260px 1fr; min-height: 100vh; }
+    .side { border-right: 1px solid var(--line); background: linear-gradient(180deg, #0d1118 0%, #090b10 100%); }
+    .brand { padding: 22px 18px; border-bottom: 1px solid var(--line); }
+    .brand .eyebrow { color: var(--red); letter-spacing: .22em; font-size: 11px; text-transform: uppercase; }
+    .brand h1 { margin: 8px 0 0; font-size: 34px; line-height: 1; }
+    .nav { padding: 12px; display: grid; gap: 6px; }
+    .nav button { width: 100%; text-align: left; border: 1px solid transparent; background: transparent; color: #c7ccd8; padding: 10px 12px; border-radius: 10px; cursor: pointer; }
+    .nav button.active { border-color: #6f251f; background: rgba(223,63,49,.18); color: #fff; }
+    .main { padding: 24px 28px; }
+    .banner { border: 1px solid #5a221d; background: rgba(223,63,49,.10); color: #f5c8c3; padding: 10px 12px; text-transform: uppercase; letter-spacing: .14em; font-size: 11px; }
+    .h { margin: 18px 0 0; font-size: 56px; letter-spacing: .02em; }
+    .sub { color: var(--muted); max-width: 760px; margin: 8px 0 18px; }
+    .grid { display: grid; gap: 12px; grid-template-columns: repeat(5, minmax(0,1fr)); }
+    .card { border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(180deg, #141821, #0f131b); padding: 14px; }
+    .label { font-size: 11px; color: #9ca3b2; letter-spacing: .16em; text-transform: uppercase; }
+    .value { font-size: 52px; line-height: 1; margin-top: 8px; }
+    .row { display: grid; gap: 12px; grid-template-columns: 1.4fr .9fr; margin-top: 12px; }
+    .panel { border: 1px solid var(--line); border-radius: 14px; background: linear-gradient(180deg, #121721, #0d1118); padding: 16px; }
+    .panel h3 { margin: 0; font-size: 38px; text-transform: uppercase; }
+    .item { margin-top: 10px; padding: 11px 12px; border: 1px solid #232734; border-radius: 10px; display: flex; justify-content: space-between; gap: 10px; }
+    .muted { color: var(--muted); }
+    .view { display: none; }
+    .view.active { display: block; }
+    .table { width: 100%; margin-top: 12px; border-collapse: collapse; }
+    .table th, .table td { border-bottom: 1px solid #252936; padding: 10px 8px; text-align: left; }
+    .chip { border: 1px solid #4a1f1a; color: #ffb7ad; padding: 3px 8px; border-radius: 999px; font-size: 12px; }
+    @media (max-width: 980px) {
+      .shell { grid-template-columns: 1fr; }
+      .grid { grid-template-columns: repeat(2,minmax(0,1fr)); }
+      .row { grid-template-columns: 1fr; }
+      .h { font-size: 38px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="side">
+      <div class="brand">
+        <div class="eyebrow">Justin Robinson</div>
+        <h1>CRM</h1>
+      </div>
+      <nav class="nav" id="nav">
+        <button data-view="dashboard" class="active">Dashboard</button>
+        <button data-view="leads">Leads</button>
+        <button data-view="clients">Clients</button>
+        <button data-view="workouts">Workouts</button>
+        <button data-view="billing">Billing</button>
+      </nav>
+    </aside>
+    <main class="main">
+      <div class="banner">Mockup Mode · Frontend-only pitch build · No live data</div>
+
+      <section id="dashboard" class="view active">
+        <h2 class="h">CRM DASHBOARD</h2>
+        <p class="sub">Pitch flow view: leads captured from the website, bookings coming in, and client operations tracked in one place.</p>
+        <div class="grid">
+          <div class="card"><div class="label">Active Clients</div><div class="value">18</div></div>
+          <div class="card"><div class="label">MRR</div><div class="value">$12.8K</div></div>
+          <div class="card"><div class="label">New Leads</div><div class="value">34</div></div>
+          <div class="card"><div class="label">Follow-ups</div><div class="value">9</div></div>
+          <div class="card"><div class="label">Meal Orders</div><div class="value">126</div></div>
+        </div>
+        <div class="row">
+          <div class="panel"><h3>Today’s Sessions</h3><div class="item"><span>Marcus T. <span class="muted">· Lower Body</span></span><span class="chip">Scheduled</span></div><div class="item"><span>Alicia R. <span class="muted">· Conditioning</span></span><span class="chip">Scheduled</span></div></div>
+          <div class="panel"><h3>Alerts</h3><div class="item"><span>Payment failed: Chris B.</span><span class="chip">Failed</span></div><div class="item"><span>Overdue check-ins</span><span class="chip">Warning</span></div></div>
+        </div>
+      </section>
+
+      <section id="leads" class="view">
+        <h2 class="h">LEADS INBOX</h2>
+        <p class="sub">Static pipeline view for your pitch demo.</p>
+        <table class="table">
+          <thead><tr><th>Name</th><th>Source</th><th>Status</th><th>Next Follow-up</th></tr></thead>
+          <tbody>
+            <tr><td>Marcus T.</td><td>Instagram</td><td>Qualified</td><td>Tomorrow 9:00 AM</td></tr>
+            <tr><td>Alicia R.</td><td>Website Form</td><td>Contacted</td><td>Today 4:00 PM</td></tr>
+            <tr><td>Derek W.</td><td>Referral</td><td>New</td><td>Today 2:00 PM</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="clients" class="view">
+        <h2 class="h">CLIENTS</h2>
+        <p class="sub">Active roster with package and adherence signal.</p>
+        <table class="table">
+          <thead><tr><th>Client</th><th>Package</th><th>Billing</th><th>Adherence</th></tr></thead>
+          <tbody>
+            <tr><td>Marcus T.</td><td>12-week Transformation</td><td>Paid</td><td>92%</td></tr>
+            <tr><td>Alicia R.</td><td>8-week Recomp</td><td>Paid</td><td>88%</td></tr>
+            <tr><td>Derek W.</td><td>Strength + Meals</td><td>Past Due</td><td>76%</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="workouts" class="view">
+        <h2 class="h">WORKOUT BUILDER</h2>
+        <p class="sub">Program cards and day-by-day editor shell.</p>
+        <div class="row">
+          <div class="panel"><h3>Program Library</h3><div class="item"><span>Hypertrophy Block A</span><span class="chip">Template</span></div><div class="item"><span>Fat Loss Phase B</span><span class="chip">Template</span></div></div>
+          <div class="panel"><h3>Editor</h3><div class="item"><span>Day 1 Push</span><span class="muted">6 exercises</span></div><div class="item"><span>Day 2 Pull</span><span class="muted">7 exercises</span></div></div>
+        </div>
+      </section>
+
+      <section id="billing" class="view">
+        <h2 class="h">BILLING</h2>
+        <p class="sub">Package + invoice shell for demo narrative.</p>
+        <table class="table">
+          <thead><tr><th>Invoice</th><th>Client</th><th>Amount</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>#INV-1021</td><td>Marcus T.</td><td>$499</td><td>Paid</td></tr>
+            <tr><td>#INV-1022</td><td>Alicia R.</td><td>$399</td><td>Paid</td></tr>
+            <tr><td>#INV-1023</td><td>Derek W.</td><td>$599</td><td>Failed</td></tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const buttons = document.querySelectorAll('#nav button');
+    const views = document.querySelectorAll('.view');
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        buttons.forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.dataset.view;
+        views.forEach((v) => v.classList.toggle('active', v.id === target));
+      });
+    });
+  </script>
+</body>
+</html>

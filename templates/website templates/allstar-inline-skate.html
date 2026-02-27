@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AllStar Inline Skate | Own The Street</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+body { font-family: 'Inter', sans-serif; }
+h1, h2, h3, h4, .font-display { font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+.clip-slant { clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); }
+.clip-slant-reverse { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%); }
+</style></head>
+<body class="antialiased bg-white text-[#111] selection:bg-[#E10600] selection:text-white">
+
+    <!-- Top Bar -->
+    <div class="bg-black text-white py-2 px-4 md:px-8 border-b border-white/10 hidden md:block">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center text-xs font-medium tracking-wide">
+            <div class="flex items-center gap-6">
+                <span>OPEN HOURS: 08:00 - 22:00</span>
+                <span class="text-white/60">|</span>
+                <span>SECTOR 4, DOWNTOWN</span>
+            </div>
+            <div class="flex items-center gap-4">
+                <a href="#" class="hover:text-[#E10600] transition-colors"><i data-lucide="facebook" class="w-3 h-3"></i></a>
+                <a href="#" class="hover:text-[#E10600] transition-colors"><i data-lucide="twitter" class="w-3 h-3"></i></a>
+                <a href="#" class="hover:text-[#E10600] transition-colors"><i data-lucide="instagram" class="w-3 h-3"></i></a>
+                <a href="#" class="hover:text-[#E10600] transition-colors"><i data-lucide="youtube" class="w-3 h-3"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="absolute top-8 md:top-10 left-0 w-full z-50 px-4 md:px-8">
+        <div class="max-w-[1400px] mx-auto flex justify-between items-center">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <div class="bg-[#E10600] p-1.5 rounded-sm">
+                    <i data-lucide="star" class="w-5 h-5 text-white fill-current"></i>
+                </div>
+                <span class="font-display text-2xl uppercase tracking-wider text-white font-bold italic">AllStar</span>
+            </div>
+
+            <!-- Links -->
+            <div class="hidden md:flex gap-8 text-sm font-semibold tracking-wide text-white uppercase">
+                <a href="#" class="hover:text-[#E10600] transition-colors">About</a>
+                <a href="#" class="hover:text-[#E10600] transition-colors">Program</a>
+                <a href="#" class="hover:text-[#E10600] transition-colors">Pages</a>
+                <a href="#" class="hover:text-[#E10600] transition-colors">Blog</a>
+                <a href="#" class="hover:text-[#E10600] transition-colors">Contact</a>
+            </div>
+
+            <div class="flex items-center gap-4">
+                <button class="bg-[#E10600] text-white px-6 py-2.5 text-xs font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-colors rounded-sm hidden md:block">
+                    Join Now
+                </button>
+                <button class="md:hidden text-white">
+                    <i data-lucide="menu" class="w-7 h-7"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative min-h-[85vh] flex items-center pt-20 overflow-hidden bg-[#0a0a0a]">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" alt="Inline skater urban" class="w-full h-full object-cover opacity-50 grayscale">
+            <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10"></div>
+        </div>
+
+        <!-- Content -->
+        <div class="relative z-20 w-full max-w-[1400px] mx-auto px-4 md:px-8">
+            <div class="grid md:grid-cols-12 gap-12 items-center">
+                <div class="md:col-span-8 lg:col-span-7">
+                    <span class="text-[#E10600] font-bold tracking-widest uppercase text-sm mb-4 block">Est. 2006</span>
+                    <h1 class="text-5xl md:text-7xl lg:text-8xl leading-[0.9] font-display font-bold uppercase text-white mb-8 tracking-tight">
+                        The Best Inline <br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">Skating School</span> <br/>
+                        In The World
+                    </h1>
+                    <p class="text-gray-300 max-w-lg mb-10 text-lg leading-relaxed font-light">
+                        Reclaim the urban landscape. Built for speed, style, and togetherness. Join the movement today.
+                    </p>
+
+                    <div class="flex flex-wrap gap-4">
+                        <button class="px-8 py-4 bg-[#E10600] text-white text-sm font-bold uppercase tracking-wider rounded-sm hover:bg-[#c00500] transition-colors">
+                            Start Training
+                        </button>
+                        <button class="w-12 h-12 flex items-center justify-center border-2 border-white rounded-full text-white hover:bg-white hover:text-black transition-colors">
+                            <i data-lucide="play" class="w-4 h-4 fill-current ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Floating Stats Box -->
+                <div class="md:col-span-4 lg:col-span-5 relative hidden md:block h-full min-h-[400px]">
+                    <div class="absolute bottom-10 right-0 bg-[#E10600] text-white p-8 w-48 h-48 flex flex-col justify-center items-center text-center shadow-2xl z-30">
+                        <span class="text-5xl font-display font-bold">18+</span>
+                        <span class="text-sm font-medium uppercase mt-2 leading-tight">Years of<br>Experience</span>
+                        <div class="w-full h-px bg-white/30 my-3"></div>
+                        <span class="text-2xl font-display font-bold">1.2k</span>
+                        <span class="text-xs uppercase opacity-80">Members</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- About / Lifestyle Section -->
+    <section class="py-20 md:py-28 bg-white px-4 md:px-8">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Side with offset border style -->
+                <div class="relative">
+                    <div class="absolute -top-4 -left-4 w-full h-full border-4 border-[#E10600] z-0 hidden md:block"></div>
+                    <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/4734259a-bad7-422f-981e-ce01e79184f2_1600w.jpg" alt="Skating lifestyle" class="relative z-10 w-full h-[500px] object-cover grayscale contrast-125 shadow-xl">
+                    <div class="absolute bottom-8 left-0 z-20 bg-white p-4 shadow-lg max-w-xs hidden md:block">
+                        <p class="font-display text-2xl uppercase font-bold text-black">Alex Chen</p>
+                        <p class="text-[#E10600] text-xs font-bold uppercase tracking-widest">Head Instructor</p>
+                    </div>
+                </div>
+
+                <!-- Content Side -->
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-[#E10600] font-bold text-xs tracking-[0.2em] uppercase mb-2 block">About Us</span>
+                        <h2 class="text-4xl md:text-5xl font-display font-bold uppercase leading-none text-black">
+                            Best Skating School <br/>and Community Since 2006
+                        </h2>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed">
+                        It's about the freedom of the glide, the discipline of speed, and the community that pushes you further. Whether you're dodging traffic or cruising the coastline, every stride counts. We provide the highest level of coaching for all skill levels.
+                    </p>
+
+                    <!-- Features Grid -->
+                    <div class="grid grid-cols-3 gap-6 pt-6">
+                        <div class="bg-gray-50 p-6 border-b-2 border-transparent hover:border-[#E10600] transition-colors group">
+                            <i data-lucide="award" class="w-8 h-8 text-[#E10600] mb-4"></i>
+                            <h4 class="font-display font-bold text-lg leading-tight mb-2">Best<br>Coaching</h4>
+                            <p class="text-xs text-gray-500">Certified pros guide your every move.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 border-b-2 border-transparent hover:border-[#E10600] transition-colors group">
+                            <i data-lucide="users" class="w-8 h-8 text-[#E10600] mb-4"></i>
+                            <h4 class="font-display font-bold text-lg leading-tight mb-2">Group<br>Sessions</h4>
+                            <p class="text-xs text-gray-500">Join 15+ weekly community rides.</p>
+                        </div>
+                        <div class="bg-gray-50 p-6 border-b-2 border-transparent hover:border-[#E10600] transition-colors group">
+                            <i data-lucide="zap" class="w-8 h-8 text-[#E10600] mb-4"></i>
+                            <h4 class="font-display font-bold text-lg leading-tight mb-2">Top<br>Equipment</h4>
+                            <p class="text-xs text-gray-500">Access to pro-grade gear rentals.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Logos Strip -->
+    <div class="border-y border-gray-100 py-12 bg-white">
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8 flex flex-wrap justify-between items-center gap-8 opacity-50 grayscale">
+            <span class="font-display text-2xl font-bold">ROCES</span>
+            <span class="font-display text-2xl font-bold">ROLLERBLADE</span>
+            <span class="font-display text-2xl font-bold">POWERSLIDE</span>
+            <span class="font-display text-2xl font-bold">SEBA</span>
+            <span class="font-display text-2xl font-bold">K2 SKATES</span>
+        </div>
+    </div>
+
+    <!-- Programs Grid -->
+    <section class="py-20 md:py-28 bg-gray-50 px-4 md:px-8">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Red Box Info -->
+                <div class="bg-[#E10600] p-10 flex flex-col justify-center items-start text-white relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 text-white/10">
+                        <i data-lucide="star" class="w-40 h-40 fill-current"></i>
+                    </div>
+                    <span class="text-xs font-bold tracking-widest uppercase mb-4 opacity-80">Our Programs</span>
+                    <h3 class="text-3xl md:text-4xl font-display font-bold uppercase leading-none mb-6">
+                        Our Trainers Are <br>World Champions
+                    </h3>
+                    <p class="text-white/80 text-sm mb-8 leading-relaxed">
+                        Learn from the best. Our instructors hold national titles in speed, slalom, and aggressive skating.
+                    </p>
+                    <button class="bg-white text-[#E10600] px-6 py-3 text-xs font-bold uppercase tracking-wider hover:bg-black hover:text-white transition-colors">
+                        View All
+                    </button>
+                </div>
+
+                <!-- Program 1 -->
+                <div class="group bg-white shadow-sm hover:shadow-xl transition-shadow">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/c543a9e1-f226-4ced-80b0-feb8445a75b9_1600w.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <div class="p-6 relative">
+                        <div class="absolute top-0 right-0 w-12 h-1 bg-[#E10600]"></div>
+                        <h4 class="font-display font-bold text-xl uppercase mb-2">Urban Beginner</h4>
+                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">Master the basics of balance, braking, and city navigation.</p>
+                        <a href="#" class="text-[#E10600] text-xs font-bold uppercase tracking-widest hover:text-black">Learn More</a>
+                    </div>
+                </div>
+
+                <!-- Program 2 -->
+                <div class="group bg-white shadow-sm hover:shadow-xl transition-shadow">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=2670&auto=format&fit=crop" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <div class="p-6 relative">
+                         <div class="absolute top-0 right-0 w-12 h-1 bg-[#E10600]"></div>
+                        <h4 class="font-display font-bold text-xl uppercase mb-2">Speed & Endurance</h4>
+                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">High-intensity training for those looking to push their limits.</p>
+                        <a href="#" class="text-[#E10600] text-xs font-bold uppercase tracking-widest hover:text-black">Learn More</a>
+                    </div>
+                </div>
+
+                <!-- Program 3 -->
+                <div class="group bg-white shadow-sm hover:shadow-xl transition-shadow">
+                    <div class="h-64 overflow-hidden relative">
+                        <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/5bab247f-35d9-400d-a82b-fd87cfe913d2_1600w.webp" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                        <div class="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors"></div>
+                    </div>
+                    <div class="p-6 relative">
+                         <div class="absolute top-0 right-0 w-12 h-1 bg-[#E10600]"></div>
+                        <h4 class="font-display font-bold text-xl uppercase mb-2">Freestyle Slalom</h4>
+                        <p class="text-sm text-gray-500 mb-4 line-clamp-2">Technical cone work and artistic expression on wheels.</p>
+                        <a href="#" class="text-[#E10600] text-xs font-bold uppercase tracking-widest hover:text-black">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dark Feature Section (Black Background) -->
+    <section class="bg-black text-white py-20 md:py-28 relative overflow-hidden">
+        <!-- Red Accent Sidebar -->
+        <div class="absolute top-0 right-0 w-1/3 h-full bg-[#E10600] transform skew-x-12 translate-x-20 opacity-90 hidden lg:block"></div>
+
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="space-y-8">
+                    <div>
+                        <span class="text-[#E10600] lg:text-white font-bold text-xs tracking-[0.2em] uppercase mb-2 block">Why Choose Us</span>
+                        <h2 class="text-4xl md:text-5xl font-display font-bold uppercase leading-none">
+                            We Push Your <br/> Limits Further
+                        </h2>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed max-w-md">
+                        Our challenges are designed to keep you motivated. Whether it's distance, speed, or skill acquisition, there's always a new goal to smash.
+                    </p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-y-6 gap-x-12 pt-4">
+                        <div class="flex items-start gap-4">
+                            <div class="bg-[#E10600] p-1 mt-1 shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-display font-bold text-lg uppercase">Pro Coaching Staff</h5>
+                                <p class="text-xs text-gray-500 mt-1">National champions as mentors.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-[#E10600] p-1 mt-1 shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-display font-bold text-lg uppercase">Nutritional Guide</h5>
+                                <p class="text-xs text-gray-500 mt-1">Fuel for long distance rides.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-[#E10600] p-1 mt-1 shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-display font-bold text-lg uppercase">Safety Gear</h5>
+                                <p class="text-xs text-gray-500 mt-1">Premium pads and helmets.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="bg-[#E10600] p-1 mt-1 shrink-0">
+                                <i data-lucide="check" class="w-3 h-3 text-white"></i>
+                            </div>
+                            <div>
+                                <h5 class="font-display font-bold text-lg uppercase">Competition Prep</h5>
+                                <p class="text-xs text-gray-500 mt-1">Get ready for marathons.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative h-[500px] lg:h-[600px] w-full">
+                     <img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=2670&auto=format&fit=crop" class="w-full h-full object-cover object-center grayscale contrast-125 lg:shadow-[-20px_20px_0_0_rgba(255,255,255,0.1)]">
+
+                     <!-- Overlay Card -->
+                     <div class="absolute bottom-10 left-0 bg-white text-black p-6 max-w-xs shadow-xl hidden md:block">
+                        <div class="flex items-center gap-4 mb-4">
+                            <i data-lucide="trophy" class="w-8 h-8 text-[#E10600]"></i>
+                            <div>
+                                <h4 class="font-display font-bold text-xl uppercase">Summer Marathon</h4>
+                                <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Active Challenge</span>
+                            </div>
+                        </div>
+                        <div class="w-full bg-gray-200 h-1.5 mb-2">
+                            <div class="bg-[#E10600] h-1.5 w-[70%]"></div>
+                        </div>
+                        <div class="flex justify-between text-xs font-bold text-gray-500 uppercase">
+                            <span>Progress</span>
+                            <span>70%</span>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team / Community Section -->
+    <section class="py-20 md:py-28 bg-white px-4 md:px-8">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="text-center mb-16">
+                <span class="text-[#E10600] font-bold text-xs tracking-[0.2em] uppercase mb-2 block">Featured Members</span>
+                <h2 class="text-4xl md:text-5xl font-display font-bold uppercase text-black">
+                    Meet The Community Pros
+                </h2>
+                <div class="w-20 h-1 bg-[#E10600] mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Member 1 -->
+                <div class="group relative">
+                    <div class="aspect-[3/4] overflow-hidden bg-gray-100 relative mb-4">
+                         <!-- Social Sidebar Overlay -->
+                         <div class="absolute top-4 right-4 flex flex-col gap-2 z-20 translate-x-10 group-hover:translate-x-0 transition-transform duration-300">
+                            <a href="#" class="bg-[#E10600] text-white p-2 hover:bg-black transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="bg-[#E10600] text-white p-2 hover:bg-black transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                         </div>
+                        <img src="https://i.pravatar.cc/150?u=a042581f4e29026024d" alt="Member" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-display font-bold text-2xl uppercase">Alex Chen</h3>
+                        <p class="text-[#E10600] text-xs font-bold uppercase tracking-widest mt-1">Speed Team Captain</p>
+                    </div>
+                </div>
+
+                <!-- Member 2 -->
+                <div class="group relative">
+                    <div class="aspect-[3/4] overflow-hidden bg-gray-100 relative mb-4">
+                         <div class="absolute top-4 right-4 flex flex-col gap-2 z-20 translate-x-10 group-hover:translate-x-0 transition-transform duration-300">
+                            <a href="#" class="bg-[#E10600] text-white p-2 hover:bg-black transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="bg-[#E10600] text-white p-2 hover:bg-black transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                         </div>
+                        <img src="https://i.pravatar.cc/150?u=a04258a2462d826712d" alt="Member" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-display font-bold text-2xl uppercase">Sarah Jenkins</h3>
+                        <p class="text-[#E10600] text-xs font-bold uppercase tracking-widest mt-1">Freestyle Expert</p>
+                    </div>
+                </div>
+
+                <!-- Member 3 -->
+                <div class="group relative">
+                    <div class="aspect-[3/4] overflow-hidden bg-gray-100 relative mb-4">
+                         <div class="absolute top-4 right-4 flex flex-col gap-2 z-20 translate-x-10 group-hover:translate-x-0 transition-transform duration-300">
+                            <a href="#" class="bg-[#E10600] text-white p-2 hover:bg-black transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                            <a href="#" class="bg-[#E10600] text-white p-2 hover:bg-black transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                         </div>
+                        <img src="https://i.pravatar.cc/150?u=23" alt="Member" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
+                    </div>
+                    <div class="text-center">
+                        <h3 class="font-display font-bold text-2xl uppercase">Marcus Davila</h3>
+                        <p class="text-[#E10600] text-xs font-bold uppercase tracking-widest mt-1">Urban Instructor</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Discount CTA Banner -->
+    <section class="relative bg-[#111] py-20 overflow-hidden">
+        <div class="absolute inset-0 opacity-40">
+            <img src="https://hoirqrkdgbmvpwutwuwj.supabase.co/storage/v1/object/public/assets/assets/917d6f93-fb36-439a-8c48-884b67b35381_1600w.jpg" class="w-full h-full object-cover object-top grayscale">
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"></div>
+
+        <div class="max-w-[1400px] mx-auto px-4 md:px-8 relative z-10 flex flex-col md:flex-row items-center justify-between gap-10">
+            <div>
+                <span class="text-[#E10600] font-bold text-xs tracking-[0.2em] uppercase mb-2 block">Join Today</span>
+                <h2 class="text-4xl md:text-6xl font-display font-bold uppercase text-white mb-2">
+                    Get Special 25% Discount
+                </h2>
+                <p class="text-gray-400 max-w-lg">Sign up for the "AllStar Unlimited" annual pass this week and save on your membership.</p>
+            </div>
+            <button class="bg-[#E10600] text-white px-10 py-5 text-sm font-bold uppercase tracking-wider hover:bg-white hover:text-black transition-colors whitespace-nowrap">
+                Contact Us Now
+            </button>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-20 bg-white px-4 md:px-8 border-b border-gray-100">
+        <div class="max-w-[1400px] mx-auto text-center">
+            <span class="text-[#E10600] font-bold text-xs tracking-[0.2em] uppercase mb-4 block">Testimonials</span>
+            <h2 class="text-3xl md:text-4xl font-display font-bold uppercase text-black mb-16">
+                Don't Take Our Word For It, Hear Theirs
+            </h2>
+
+            <div class="grid md:grid-cols-2 gap-12 text-left">
+                <div class="flex gap-6">
+                    <img src="https://i.pravatar.cc/150?u=a042581f4e29026024d" class="w-16 h-16 rounded-full object-cover border-2 border-gray-100">
+                    <div>
+                        <div class="text-[#E10600] text-2xl font-serif leading-none mb-2">"</div>
+                        <p class="text-gray-600 italic mb-4">The night rides are electric. It's not just about skating; it's about seeing the city in a completely new light with people who share your passion.</p>
+                        <h5 class="font-display font-bold text-lg uppercase">Alex Chen</h5>
+                        <span class="text-xs text-gray-400 uppercase tracking-wider">Member since 2022</span>
+                    </div>
+                </div>
+
+                <div class="flex gap-6">
+                    <img src="https://i.pravatar.cc/150?u=a04258a2462d826712d" class="w-16 h-16 rounded-full object-cover border-2 border-gray-100">
+                    <div>
+                        <div class="text-[#E10600] text-2xl font-serif leading-none mb-2">"</div>
+                        <p class="text-gray-600 italic mb-4">I was intimidated to start, but the beginner classes gave me the confidence I needed. Now I can't imagine a week without my skates.</p>
+                        <h5 class="font-display font-bold text-lg uppercase">Sarah Jenkins</h5>
+                        <span class="text-xs text-gray-400 uppercase tracking-wider">Freestyle Skater</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#050505] text-white pt-20 pb-10 px-4 md:px-8 border-t border-white/5">
+        <div class="max-w-[1400px] mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="bg-[#E10600] p-1 rounded-sm">
+                            <i data-lucide="star" class="w-4 h-4 text-white fill-current"></i>
+                        </div>
+                        <span class="font-display text-xl uppercase tracking-wider font-bold italic">AllStar</span>
+                    </div>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-6">
+                        The premier inline skating community dedicated to the urban lifestyle, fitness, and connection.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="text-gray-500 hover:text-[#E10600] transition-colors"><i data-lucide="facebook" class="w-4 h-4"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-[#E10600] transition-colors"><i data-lucide="twitter" class="w-4 h-4"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-[#E10600] transition-colors"><i data-lucide="instagram" class="w-4 h-4"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-display font-bold text-lg uppercase mb-6">Quick Links</h4>
+                    <ul class="space-y-3 text-gray-500 text-sm">
+                        <li><a href="#" class="hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Our Programs</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Events Calendar</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors">Coaches</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-display font-bold text-lg uppercase mb-6">Address</h4>
+                    <p class="text-gray-500 text-sm leading-relaxed mb-4">
+                        123 Skating Blvd, Sector 4<br>
+                        Downtown District<br>
+                        New York, NY 10001
+                    </p>
+                    <p class="text-gray-500 text-sm">
+                        <span class="text-[#E10600] font-bold">Email:</span> hello@allstar.com
+                    </p>
+                    <p class="text-gray-500 text-sm">
+                        <span class="text-[#E10600] font-bold">Phone:</span> +1 (555) 123-4567
+                    </p>
+                </div>
+
+                <div>
+                     <h4 class="font-display font-bold text-lg uppercase mb-6">Newsletter</h4>
+                     <p class="text-gray-500 text-sm mb-4">Subscribe to get the latest updates and offers.</p>
+                     <div class="flex">
+                         <input type="email" placeholder="Email Address" class="bg-[#111] border border-gray-800 text-white px-4 py-3 text-sm focus:outline-none focus:border-[#E10600] w-full">
+                         <button class="bg-[#E10600] px-4 hover:bg-white hover:text-black transition-colors">
+                             <i data-lucide="send" class="w-4 h-4"></i>
+                         </button>
+                     </div>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-gray-600 uppercase tracking-widest">
+                <p>© 2024 AllStar Inline Skate Club.</p>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacy</a>
+                    <a href="#" class="hover:text-white">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

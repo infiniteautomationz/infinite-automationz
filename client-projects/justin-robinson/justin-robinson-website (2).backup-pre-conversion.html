@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Justin Robinson — Elite Personal Training & Meal Prep</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Teko:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --red: #C0392B;
+  --red-glow: rgba(192, 57, 43, 0.35);
+  --red-dim: rgba(192, 57, 43, 0.12);
+  --black: #090909;
+  --near-black: #111111;
+  --card: #141414;
+  --card-border: #1e1e1e;
+  --white: #FAFAFA;
+  --off-white: #ECECEC;
+  --muted: #666666;
+  --subtle: #2a2a2a;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-sub: 'Teko', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── NAV ─────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 28px 60px;
+  transition: background .4s, backdrop-filter .4s, padding .4s, border-color .4s;
+  border-bottom: 1px solid transparent;
+}
+nav.scrolled {
+  background: rgba(9,9,9,.88);
+  backdrop-filter: blur(24px);
+  padding: 16px 60px;
+  border-bottom-color: var(--card-border);
+}
+.nav-logo { font-family: var(--font-display); font-size: 22px; letter-spacing: .04em; color: var(--white); text-decoration: none; }
+.nav-logo span { color: var(--red); }
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a { font-family: var(--font-sub); font-size: 17px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color .2s; }
+.nav-links a:hover { color: var(--white); }
+.nav-cta { font-family: var(--font-sub); font-size: 14px; font-weight: 500; letter-spacing: .14em; text-transform: uppercase; color: var(--white); background: var(--red); border: none; padding: 11px 28px; cursor: pointer; text-decoration: none; display: inline-block; transition: background .2s, transform .2s var(--ease-spring); }
+.nav-cta:hover { background: #a93226; transform: scale(1.03); }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: 4px; }
+.hamburger span { display: block; width: 22px; height: 1.5px; background: var(--white); transition: transform .3s, opacity .3s; }
+
+/* ── HERO ─────────────────────── */
+#hero { position: relative; height: 100vh; min-height: 700px; display: flex; align-items: stretch; overflow: hidden; background: #090909; }
+/* Full-height column that holds hero-content + hero-stats in normal flow */
+.hero-body {
+  position: relative; z-index: 5;
+  display: flex; flex-direction: column;
+  width: 100%; height: 100%;
+  padding-top: 80px; /* clear fixed nav height */
+}
+
+/* GLSL Hills canvas fills the bottom half, creating an undulating ground */
+#glsl-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
+  /* The hills rise from center-bottom — shift perspective slightly downward */
+  transform: translateY(8%);
+}
+
+/* Deep dark gradient over the top — leaves hills visible in lower 40% */
+.hero-overlay {
+  position: absolute; inset: 0; z-index: 1;
+  background:
+    linear-gradient(to bottom,
+      rgba(9,9,9,1)    0%,
+      rgba(9,9,9,0.97) 30%,
+      rgba(9,9,9,0.78) 55%,
+      rgba(9,9,9,0.32) 78%,
+      rgba(9,9,9,0.08) 100%
+    ),
+    linear-gradient(135deg, rgba(192,57,43,0.06) 0%, transparent 60%);
+}
+
+/* Atmospheric red fog rising from hills */
+.hero-fog {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 45%; z-index: 2; pointer-events: none;
+  background: linear-gradient(to top,
+    rgba(192,57,43,0.055) 0%,
+    rgba(192,57,43,0.025) 30%,
+    transparent 100%
+  );
+  animation: fogPulse 6s ease-in-out infinite alternate;
+}
+@keyframes fogPulse {
+  from { opacity: 0.7; }
+  to   { opacity: 1; }
+}
+
+/* Horizontal horizon glow line right where hills crest */
+.hero-horizon {
+  position: absolute; bottom: 28%; left: 0; right: 0; height: 1px; z-index: 2; pointer-events: none;
+  background: linear-gradient(90deg, transparent 0%, rgba(192,57,43,0.22) 20%, rgba(192,57,43,0.5) 50%, rgba(192,57,43,0.22) 80%, transparent 100%);
+  box-shadow: 0 0 40px 8px rgba(192,57,43,0.1);
+  animation: horizonGlow 4s ease-in-out infinite alternate;
+}
+@keyframes horizonGlow {
+  from { opacity: 0.6; }
+  to   { opacity: 1; }
+}
+
+.hero-grain {
+  position: absolute; inset: 0; z-index: 3; pointer-events: none; opacity: .45;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+.hero-accent { display: none; }
+
+/* hero content — grows to fill space, centers its children */
+.hero-content {
+  position: relative; z-index: 5; width: 100%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  flex: 1;
+  padding: 0 60px 32px;
+}
+.hero-eyebrow {
+  font-family: var(--font-sub); font-size: 13px; letter-spacing: .28em; text-transform: uppercase;
+  color: var(--red); display: flex; align-items: center; gap: 16px; margin-bottom: 28px;
+}
+.hero-eyebrow::before,
+.hero-eyebrow::after { content: ''; display: block; width: 36px; height: 1px; background: var(--red); }
+.hero-headline {
+  font-family: var(--font-display); font-size: clamp(72px, 10vw, 160px); line-height: .88; letter-spacing: .01em;
+  color: var(--white);
+}
+.hero-headline .accent { color: var(--red); display: block; }
+.hero-headline .outline {
+  -webkit-text-stroke: 1.5px var(--white); color: transparent; display: block;
+  transition: -webkit-text-stroke .3s, color .3s;
+}
+.hero-headline .outline:hover { color: var(--white); -webkit-text-stroke: 0px; }
+.hero-sub {
+  font-size: clamp(14px, 1.3vw, 17px); font-weight: 300; line-height: 1.8; color: rgba(250,250,250,.55);
+  max-width: 480px; margin: 28px auto 40px;
+}
+.hero-actions {
+  display: flex; align-items: center; justify-content: center; gap: 24px; flex-wrap: wrap;
+}
+.btn-primary {
+  font-family: var(--font-sub); font-size: 15px; font-weight: 500; letter-spacing: .15em; text-transform: uppercase;
+  color: var(--white); background: var(--red); border: none; padding: 17px 48px;
+  cursor: pointer; text-decoration: none; display: inline-block; position: relative; overflow: hidden;
+  transition: transform .25s var(--ease-spring), box-shadow .25s;
+}
+.btn-primary::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(255,255,255,.12) 0%, transparent 100%); opacity: 0; transition: opacity .2s; }
+.btn-primary:hover { transform: scale(1.04); box-shadow: 0 0 50px var(--red-glow); }
+.btn-primary:hover::after { opacity: 1; }
+.btn-ghost {
+  font-family: var(--font-sub); font-size: 15px; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(250,250,250,.65); background: none; border: 1px solid var(--subtle); padding: 16px 32px;
+  cursor: pointer; text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+  transition: color .2s, border-color .2s;
+}
+.btn-ghost:hover { color: var(--white); border-color: rgba(250,250,250,.25); }
+.btn-ghost svg { transition: transform .2s; }
+.btn-ghost:hover svg { transform: translateX(5px); }
+
+/* Stats sit in normal flow at the bottom of the hero flex column */
+.hero-stats {
+  position: relative; z-index: 5;
+  display: flex; justify-content: center; align-items: flex-start; gap: 0;
+  width: 100%; padding: 32px 0 40px;
+  border-top: 1px solid rgba(255,255,255,0.07);
+  margin-top: 48px;
+}
+.stat { padding: 0 48px; border-right: 1px solid rgba(255,255,255,0.07); text-align: center; }
+.stat:last-child { border-right: none; }
+
+
+
+
+
+.stat-num { font-family: var(--font-display); font-size: 52px; line-height: 1; color: var(--white); display: block; }
+.stat-num span { color: var(--red); }
+.stat-label { font-family: var(--font-body); font-size: 11px; font-weight: 300; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: block; margin-top: 4px; }
+.scroll-ind {
+  position: absolute; right: 60px; bottom: 56px; z-index: 5;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  opacity: 0; animation: fadeIn 1s 1.6s forwards;
+}
+.scroll-ind span { font-family: var(--font-sub); font-size: 10px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); writing-mode: vertical-rl; }
+.scroll-line { width: 1px; height: 56px; background: linear-gradient(to bottom, var(--muted), transparent); position: relative; overflow: hidden; }
+.scroll-line::after { content: ''; position: absolute; top: -30px; left: 0; width: 100%; height: 28px; background: var(--red); animation: scrollDrop 1.6s ease-in-out infinite; }
+@keyframes scrollDrop { 0% { top: -30px; } 100% { top: 86px; } }
+@keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { to { opacity: 1; } }
+
+/* ── MARQUEE ─────────────────────── */
+.marquee-strip { background: var(--red); padding: 13px 0; overflow: hidden; }
+.marquee-track { display: flex; gap: 0; animation: marquee 20s linear infinite; width: max-content; }
+.marquee-item { font-family: var(--font-sub); font-size: 15px; letter-spacing: .16em; text-transform: uppercase; color: var(--white); padding: 0 40px; display: flex; align-items: center; gap: 40px; white-space: nowrap; }
+.m-dot { width: 4px; height: 4px; background: rgba(255,255,255,.5); border-radius: 50%; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ── SECTION UTIL ─────────────────────── */
+.s { padding: 140px 60px; max-width: 1400px; margin: 0 auto; }
+.sf { padding: 140px 0; }
+.section-label { font-family: var(--font-sub); font-size: 11px; letter-spacing: .32em; text-transform: uppercase; color: var(--red); display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+.section-label::before { content: ''; width: 22px; height: 1px; background: var(--red); display: block; }
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-l { opacity: 0; transform: translateX(-40px); transition: opacity .8s var(--ease-out), transform .8s var(--ease-out); }
+.reveal-l.visible { opacity: 1; transform: translateX(0); }
+.d1 { transition-delay: .1s !important; }
+.d2 { transition-delay: .2s !important; }
+.d3 { transition-delay: .3s !important; }
+.d4 { transition-delay: .4s !important; }
+
+/* ── ABOUT ─────────────────────── */
+#about { display: grid; grid-template-columns: 1fr 1fr; gap: 120px; align-items: center; }
+.about-img-wrap { position: relative; }
+.about-frame { position: relative; aspect-ratio: 3/4; background: var(--card); overflow: hidden; }
+.about-frame::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 55%, rgba(192,57,43,.18) 100%); z-index: 1; }
+.about-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(15%) contrast(1.08); transition: transform .6s var(--ease-out); }
+.about-frame:hover img { transform: scale(1.04); }
+.about-badge { position: absolute; bottom: -22px; right: -22px; background: var(--red); width: 116px; height: 116px; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 2; }
+.badge-n { font-family: var(--font-display); font-size: 38px; line-height: 1; color: var(--white); }
+.badge-t { font-family: var(--font-body); font-size: 9px; font-weight: 300; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.8); text-align: center; margin-top: 3px; }
+.about-line { position: absolute; top: 44px; left: -44px; width: 88px; height: 1px; background: var(--red); }
+.about-hl { font-family: var(--font-display); font-size: clamp(48px, 5.2vw, 84px); line-height: .92; color: var(--white); margin-bottom: 28px; }
+.about-hl em { font-style: normal; color: var(--red); }
+.about-p { font-size: 15px; font-weight: 300; line-height: 1.9; color: rgba(250,250,250,.58); margin-bottom: 18px; }
+.creds { display: flex; flex-wrap: wrap; gap: 10px; margin: 36px 0 44px; }
+.cred { font-family: var(--font-sub); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--card-border); padding: 8px 16px; transition: border-color .2s, color .2s; }
+.cred:hover { border-color: var(--red); color: var(--red); }
+
+/* ── SERVICES ─────────────────────── */
+.srv-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 72px; gap: 60px; }
+.srv-hl { font-family: var(--font-display); font-size: clamp(56px, 6.5vw, 108px); line-height: .88; color: var(--white); flex: 1; }
+.srv-intro { font-size: 15px; font-weight: 300; line-height: 1.85; color: var(--muted); max-width: 300px; flex-shrink: 0; }
+.srv-grid { display: grid; grid-template-columns: 1.35fr 1fr 1fr; gap: 2px; }
+.srv-card { position: relative; background: var(--card); padding: 56px 44px; overflow: hidden; cursor: default; transition: transform .35s var(--ease-out); }
+.srv-card::before { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .4s var(--ease-out); }
+.srv-card:hover::before { transform: scaleX(1); }
+.srv-card:hover { transform: translateY(-5px); }
+.srv-card.feat { background: var(--near-black); border: 1px solid var(--card-border); }
+.srv-card.feat::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 85% 0%, var(--red-dim) 0%, transparent 70%); pointer-events: none; }
+.srv-n { font-family: var(--font-display); font-size: 80px; line-height: 1; color: var(--card-border); position: absolute; top: 20px; right: 28px; transition: color .3s; }
+.srv-card:hover .srv-n { color: var(--subtle); }
+.srv-ico { width: 44px; height: 44px; margin-bottom: 28px; color: var(--red); }
+.srv-name { font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--white); margin-bottom: 16px; }
+.srv-desc { font-size: 14px; font-weight: 300; line-height: 1.85; color: var(--muted); margin-bottom: 32px; }
+.srv-feats { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-bottom: 44px; }
+.srv-feats li { font-size: 13px; color: rgba(250,250,250,.45); display: flex; align-items: center; gap: 10px; }
+.srv-feats li::before { content: ''; width: 14px; height: 1px; background: var(--red); flex-shrink: 0; }
+.srv-link { font-family: var(--font-sub); font-size: 13px; letter-spacing: .16em; text-transform: uppercase; color: var(--red); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; transition: gap .2s; }
+.srv-link:hover { gap: 18px; }
+
+/* ── PROCESS ─────────────────────── */
+#process { background: var(--near-black); }
+.proc-inner { max-width: 1400px; margin: 0 auto; padding: 140px 60px; }
+.proc-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 120px; align-items: start; }
+.proc-hl { font-family: var(--font-display); font-size: clamp(56px, 5.5vw, 92px); line-height: .9; color: var(--white); position: sticky; top: 120px; }
+.proc-hl span { color: var(--red); display: block; }
+.proc-steps { display: flex; flex-direction: column; }
+.proc-step { border-top: 1px solid var(--card-border); padding: 52px 0; display: grid; grid-template-columns: 76px 1fr; gap: 36px; align-items: start; }
+.proc-step:last-child { border-bottom: 1px solid var(--card-border); }
+.sn { font-family: var(--font-display); font-size: 68px; line-height: 1; color: var(--card-border); transition: color .3s; }
+.proc-step:hover .sn { color: var(--red); }
+.st { font-family: var(--font-sub); font-size: 26px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--white); margin-bottom: 12px; }
+.sd { font-size: 14px; font-weight: 300; line-height: 1.9; color: var(--muted); }
+
+/* ── RESULTS ─────────────────────── */
+.res-top { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: end; margin-bottom: 72px; }
+.res-hl { font-family: var(--font-display); font-size: clamp(56px, 6.5vw, 108px); line-height: .88; color: var(--white); }
+.res-hl em { font-style: normal; -webkit-text-stroke: 1.5px var(--white); color: transparent; }
+.res-copy { font-size: 14px; font-weight: 300; line-height: 1.9; color: var(--muted); max-width: 360px; }
+.res-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; }
+.res-card { position: relative; background: var(--card); aspect-ratio: 4/5; overflow: hidden; cursor: default; }
+.res-inner { position: absolute; inset: 0; display: flex; align-items: flex-end; padding: 28px; }
+.res-ph { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px; }
+.ph-ico { width: 56px; height: 56px; border: 1px solid var(--subtle); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--muted); }
+.ph-t { font-family: var(--font-sub); font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: var(--subtle); text-align: center; }
+.res-ov { position: absolute; inset: 0; background: linear-gradient(to top, rgba(9,9,9,.9) 0%, transparent 55%); z-index: 1; }
+.res-info { position: relative; z-index: 2; }
+.res-name { font-family: var(--font-sub); font-size: 18px; letter-spacing: .06em; text-transform: uppercase; color: var(--white); display: block; }
+.res-detail { font-size: 12px; font-weight: 300; color: var(--muted); }
+.res-dur { position: absolute; top: 20px; right: 20px; z-index: 2; background: var(--red); font-family: var(--font-sub); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--white); padding: 5px 12px; }
+
+/* ── TESTIMONIALS ─────────────────────── */
+#testi { background: var(--black); overflow: hidden; }
+.testi-inner { max-width: 1400px; margin: 0 auto; padding: 140px 60px; }
+.testi-hdr { display: flex; align-items: center; justify-content: space-between; margin-bottom: 72px; }
+.testi-hl { font-family: var(--font-display); font-size: clamp(48px, 5vw, 80px); line-height: .92; color: var(--white); }
+.testi-nav { display: flex; gap: 10px; }
+.tbtn { width: 46px; height: 46px; border: 1px solid var(--card-border); background: none; color: var(--muted); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: border-color .2s, color .2s, background .2s; }
+.tbtn:hover { border-color: var(--red); color: var(--white); background: var(--red); }
+.testi-track { display: flex; gap: 20px; overflow: hidden; }
+.tc { flex: 0 0 calc(50% - 10px); background: var(--card); border: 1px solid var(--card-border); padding: 52px 44px; position: relative; overflow: hidden; }
+.tc::before { content: '"'; font-family: var(--font-display); font-size: 180px; line-height: 1; color: var(--card-border); position: absolute; top: -16px; left: 20px; pointer-events: none; transition: color .3s; }
+.tc:hover::before { color: var(--subtle); }
+.stars { display: flex; gap: 3px; margin-bottom: 22px; }
+.star { color: var(--red); font-size: 15px; }
+.tq { font-size: 16px; font-weight: 300; line-height: 1.9; color: rgba(250,250,250,.8); margin-bottom: 36px; position: relative; z-index: 1; }
+.ta { display: flex; align-items: center; gap: 14px; }
+.tav { width: 40px; height: 40px; background: var(--subtle); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 16px; color: var(--muted); }
+.tn { font-family: var(--font-sub); font-size: 15px; letter-spacing: .08em; text-transform: uppercase; color: var(--white); display: block; }
+.tp { font-size: 11px; font-weight: 300; color: var(--muted); letter-spacing: .05em; }
+
+/* ── MEALS ─────────────────────── */
+#meals { background: var(--near-black); }
+.meals-inner { max-width: 1400px; margin: 0 auto; padding: 140px 60px; display: grid; grid-template-columns: 1fr 1fr; gap: 100px; align-items: center; }
+.meals-hl { font-family: var(--font-display); font-size: clamp(52px, 5.5vw, 90px); line-height: .9; color: var(--white); margin-bottom: 28px; }
+.meals-hl span { color: var(--red); }
+.meals-p { font-size: 14px; font-weight: 300; line-height: 1.9; color: var(--muted); margin-bottom: 44px; }
+.meal-feats { display: flex; flex-direction: column; gap: 20px; margin-bottom: 52px; }
+.mf { display: flex; align-items: flex-start; gap: 18px; padding-bottom: 20px; border-bottom: 1px solid var(--card-border); }
+.mf:last-child { border-bottom: none; padding-bottom: 0; }
+.mf-ico { width: 34px; height: 34px; border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--red); }
+.mf-t { font-family: var(--font-sub); font-size: 16px; font-weight: 500; letter-spacing: .06em; text-transform: uppercase; color: var(--white); display: block; margin-bottom: 4px; }
+.mf-d { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.75; }
+.meals-vis {}
+.meals-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mc { background: var(--card); border: 1px solid var(--card-border); overflow: hidden; position: relative; transition: transform .3s var(--ease-out), border-color .3s; cursor: none; }
+.mc:hover { transform: translateY(-4px); border-color: var(--subtle); }
+.mc:first-child { grid-column: span 2; }
+.mc-img { aspect-ratio: 16/9; background: var(--subtle); position: relative; overflow: hidden; }
+.mc:first-child .mc-img { aspect-ratio: 16/7; }
+.mc-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .4s var(--ease-out); }
+.mc:hover .mc-img img { transform: scale(1.04); }
+.mc-tag { position: absolute; top: 10px; right: 10px; background: var(--red); font-family: var(--font-sub); font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--white); padding: 4px 10px; z-index: 1; }
+.mc-info { padding: 18px; }
+.mc-name { font-family: var(--font-sub); font-size: 17px; font-weight: 500; letter-spacing: .04em; text-transform: uppercase; color: var(--white); display: block; margin-bottom: 7px; }
+.mc-macros { display: flex; gap: 14px; }
+.macro { font-size: 11px; font-weight: 300; color: var(--muted); }
+.macro strong { font-weight: 500; color: var(--off-white); display: block; font-size: 13px; }
+
+/* ── CTA ─────────────────────── */
+#cta { position: relative; background: var(--red); overflow: hidden; }
+.cta-bg { position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.07'/%3E%3C/svg%3E"); background-size: 250px; mix-blend-mode: multiply; }
+.cta-inner { max-width: 1400px; margin: 0 auto; padding: 140px 60px; position: relative; z-index: 1; text-align: center; }
+.cta-eye { font-family: var(--font-sub); font-size: 12px; letter-spacing: .3em; text-transform: uppercase; color: rgba(255,255,255,.6); margin-bottom: 22px; }
+.cta-hl { font-family: var(--font-display); font-size: clamp(64px, 9vw, 148px); line-height: .88; color: var(--white); margin-bottom: 36px; }
+.cta-sub { font-size: 16px; font-weight: 300; color: rgba(255,255,255,.72); margin-bottom: 52px; max-width: 460px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+.btn-white { font-family: var(--font-sub); font-size: 16px; font-weight: 500; letter-spacing: .15em; text-transform: uppercase; color: var(--red); background: var(--white); border: none; padding: 20px 64px; cursor: none; text-decoration: none; display: inline-block; transition: transform .25s var(--ease-spring), box-shadow .25s; }
+.btn-white:hover { transform: scale(1.05); box-shadow: 0 24px 64px rgba(0,0,0,.28); }
+
+/* ── FOOTER ─────────────────────── */
+footer { background: var(--near-black); border-top: 1px solid var(--card-border); padding: 80px 60px 48px; }
+.ft { max-width: 1400px; margin: 0 auto; }
+.ft-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 72px; padding-bottom: 56px; border-bottom: 1px solid var(--card-border); margin-bottom: 36px; }
+.ft-brand { font-family: var(--font-display); font-size: 26px; color: var(--white); margin-bottom: 16px; display: block; text-decoration: none; }
+.ft-brand span { color: var(--red); }
+.ft-tag { font-size: 13px; font-weight: 300; color: var(--muted); line-height: 1.85; margin-bottom: 28px; }
+.ft-social { display: flex; gap: 10px; }
+.soc { width: 34px; height: 34px; border: 1px solid var(--card-border); display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; transition: border-color .2s, color .2s, background .2s; cursor: none; }
+.soc:hover { border-color: var(--red); color: var(--white); background: var(--red); }
+.ft-col-lbl { font-family: var(--font-sub); font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; display: block; }
+.ft-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ft-links a { font-size: 13px; font-weight: 300; color: rgba(250,250,250,.45); text-decoration: none; transition: color .2s; }
+.ft-links a:hover { color: var(--white); }
+.ft-bot { display: flex; align-items: center; justify-content: space-between; }
+.ft-legal { font-size: 11px; font-weight: 300; color: var(--muted); }
+.ft-blt { font-size: 11px; font-weight: 300; color: var(--muted); }
+.ft-blt span { color: var(--red); font-weight: 500; }
+
+/* ── RESPONSIVE ─────────────────────── */
+@media (max-width: 1100px) {
+  nav { padding: 20px 32px; }
+  nav.scrolled { padding: 14px 32px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  .hero-content { padding: 0 24px 24px; }
+  .hero-stats { padding: 24px 16px 32px; flex-wrap: wrap; gap: 24px; margin-top: 0; }
+  .stat { border-right: none; padding: 0; margin: 0; }
+  .scroll-ind { display: none; }
+  .hero-accent { display: none; }
+  .s { padding: 100px 32px; }
+  .sf { padding: 100px 0; }
+  #about { grid-template-columns: 1fr; gap: 60px; }
+  .about-img-wrap { max-width: 380px; }
+  .srv-grid { grid-template-columns: 1fr 1fr; }
+  .srv-header { flex-direction: column; gap: 20px; align-items: flex-start; }
+  .proc-inner { padding: 100px 32px; }
+  .proc-grid { grid-template-columns: 1fr; gap: 56px; }
+  .proc-hl { position: static; }
+  .s#results { padding: 100px 32px; }
+  .res-top { grid-template-columns: 1fr; gap: 28px; }
+  .res-grid { grid-template-columns: 1fr 1fr; }
+  .testi-inner { padding: 100px 32px; }
+  .tc { flex: 0 0 calc(85% - 10px); }
+  .meals-inner { grid-template-columns: 1fr; gap: 60px; padding: 100px 32px; }
+  .cta-inner { padding: 100px 32px; }
+  .ft-top { grid-template-columns: 1fr 1fr; gap: 44px; }
+  footer { padding: 60px 32px 40px; }
+}
+@media (max-width: 640px) {
+  .hero-headline { font-size: clamp(64px, 16vw, 100px); }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .srv-grid { grid-template-columns: 1fr; }
+  .res-grid { grid-template-columns: 1fr; }
+  .tc { flex: 0 0 calc(90% - 10px); }
+  .ft-top { grid-template-columns: 1fr; gap: 36px; }
+  .ft-bot { flex-direction: column; gap: 12px; align-items: flex-start; }
+  body { cursor: auto; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">JUSTIN <span>ROBINSON</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#meals">Meal Prep</a></li>
+    <li><a href="#results">Results</a></li>
+  </ul>
+  <a href="#cta" class="nav-cta">Book a Call</a>
+  <button class="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <canvas id="glsl-canvas"></canvas>
+  <div class="hero-overlay"></div>
+  <div class="hero-fog"></div>
+  <div class="hero-horizon"></div>
+  <div class="hero-grain"></div>
+
+  <div class="hero-body">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Huntsville's Premier Coach</div>
+      <h1 class="hero-headline">
+        BUILD<br>
+        THE<br>
+        <span class="accent">BODY.</span>
+      </h1>
+      <p class="hero-sub">
+        In-person personal training paired with chef-prepared meals delivered to your door.
+        Real programs. Real results. No guesswork.
+      </p>
+      <div class="hero-actions">
+        <a href="#cta" class="btn-primary">Book a Free Call</a>
+        <a href="#services" class="btn-ghost">
+          Explore Services
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat"><span class="stat-num" data-target="50" data-suffix="+">0<span>+</span></span><span class="stat-label">Clients Transformed</span></div>
+      <div class="stat"><span class="stat-num" data-target="5" data-suffix="★">0<span>★</span></span><span class="stat-label">Client Rating</span></div>
+      <div class="stat"><span class="stat-num" data-target="3" data-suffix="+">0<span>+</span></span><span class="stat-label">Years Coaching</span></div>
+    </div>
+  </div>
+
+  <div class="scroll-ind">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-strip">
+  <div class="marquee-track">
+    <div class="marquee-item">In-Person Training <span class="m-dot"></span></div>
+    <div class="marquee-item">Custom Meal Prep <span class="m-dot"></span></div>
+    <div class="marquee-item">Local Delivery <span class="m-dot"></span></div>
+    <div class="marquee-item">Virtual Check-Ins <span class="m-dot"></span></div>
+    <div class="marquee-item">Macro Tracking <span class="m-dot"></span></div>
+    <div class="marquee-item">Real Results <span class="m-dot"></span></div>
+    <div class="marquee-item">In-Person Training <span class="m-dot"></span></div>
+    <div class="marquee-item">Custom Meal Prep <span class="m-dot"></span></div>
+    <div class="marquee-item">Local Delivery <span class="m-dot"></span></div>
+    <div class="marquee-item">Virtual Check-Ins <span class="m-dot"></span></div>
+    <div class="marquee-item">Macro Tracking <span class="m-dot"></span></div>
+    <div class="marquee-item">Real Results <span class="m-dot"></span></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="s">
+  <div class="about-img-wrap reveal-l">
+    <div class="about-frame">
+      <div class="about-line"></div>
+      <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=800&q=80" alt="Justin Robinson — Personal Trainer" loading="lazy"/>
+      <div class="about-badge"><span class="badge-n">50<small style="font-size:.6em">+</small></span><span class="badge-t">Clients<br>Transformed</span></div>
+    </div>
+  </div>
+  <div class="reveal">
+    <div class="section-label">About Justin</div>
+    <h2 class="about-hl">Train Hard.<br>Eat <em>Smarter.</em><br>Live Better.</h2>
+    <p class="about-p">Justin Robinson isn't your average personal trainer. He's built a coaching system that treats food and fitness as one unified strategy — because you can't out-train a bad diet, and you can't out-eat a weak program.</p>
+    <p class="about-p">With in-person sessions tailored to your body and weekly chef-prepared meals delivered to your door, Justin removes every excuse standing between you and the physique you want.</p>
+    <div class="creds">
+      <span class="cred">NASM Certified</span>
+      <span class="cred">Nutrition Coaching</span>
+      <span class="cred">Strength & Conditioning</span>
+      <span class="cred">Meal Planning</span>
+    </div>
+    <a href="#cta" class="btn-primary">Work With Justin</a>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="s" style="padding-top:0">
+  <div class="srv-header">
+    <div class="section-label reveal">What I Offer</div>
+    <h2 class="srv-hl reveal">The Full<br>System.</h2>
+    <p class="srv-intro reveal d1">Training, nutrition, and accountability working together — not three separate things, one complete approach.</p>
+  </div>
+  <div class="srv-grid">
+    <div class="srv-card feat reveal">
+      <span class="srv-n">01</span>
+      <svg class="srv-ico" viewBox="0 0 48 48" fill="none"><rect x="6" y="20" width="6" height="8" rx="1" fill="currentColor" opacity=".4"/><rect x="36" y="20" width="6" height="8" rx="1" fill="currentColor" opacity=".4"/><rect x="12" y="14" width="24" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="24" y1="14" x2="24" y2="34" stroke="currentColor" stroke-width="1.5" opacity=".5"/><circle cx="24" cy="36" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      <h3 class="srv-name">Personal Training</h3>
+      <p class="srv-desc">One-on-one in-person sessions engineered for your specific goals, fitness level, and schedule. Every rep counts.</p>
+      <ul class="srv-feats">
+        <li>Custom program built for your body</li>
+        <li>Real-time form coaching & correction</li>
+        <li>Weekly program progressions</li>
+        <li>Virtual check-ins between sessions</li>
+        <li>Progress tracking & milestone reviews</li>
+      </ul>
+      <a href="#cta" class="srv-link">Start Training <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5"/></svg></a>
+    </div>
+    <div class="srv-card reveal d1">
+      <span class="srv-n">02</span>
+      <svg class="srv-ico" viewBox="0 0 48 48" fill="none"><path d="M8 32C8 32 12 20 24 20C36 20 40 32 40 32" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><rect x="10" y="32" width="28" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/><line x1="24" y1="16" x2="24" y2="20" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="13" r="3" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      <h3 class="srv-name">Meal Prep</h3>
+      <p class="srv-desc">Chef-prepared, macro-tracked meals designed around your training and body composition goals. Ready to eat, every week.</p>
+      <ul class="srv-feats">
+        <li>Macro-aligned recipes weekly</li>
+        <li>High protein, whole food ingredients</li>
+        <li>Dietary restrictions accommodated</li>
+        <li>Fresh — never frozen</li>
+      </ul>
+      <a href="#cta" class="srv-link">Add Meals <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5"/></svg></a>
+    </div>
+    <div class="srv-card reveal d2">
+      <span class="srv-n">03</span>
+      <svg class="srv-ico" viewBox="0 0 48 48" fill="none"><rect x="8" y="16" width="32" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M16 16V12C16 10 18 8 24 8C30 8 32 10 32 12V16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="24" cy="27" r="4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      <h3 class="srv-name">Training + Meals Bundle</h3>
+      <p class="srv-desc">The complete system. Coaching and nutrition under one plan for maximum results. This is how clients transform in 12 weeks.</p>
+      <ul class="srv-feats">
+        <li>All training services included</li>
+        <li>Weekly meal prep & delivery</li>
+        <li>Bundled pricing — best value</li>
+        <li>Unified progress tracking</li>
+      </ul>
+      <a href="#cta" class="srv-link">Get the Bundle <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M13 8L9 4M13 8L9 12" stroke="currentColor" stroke-width="1.5"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<div id="process" class="sf">
+  <div class="proc-inner">
+    <div class="proc-grid">
+      <div class="reveal-l">
+        <div class="section-label">The Process</div>
+        <h2 class="proc-hl">How It <span>Works.</span></h2>
+      </div>
+      <div class="proc-steps">
+        <div class="proc-step reveal"><span class="sn">01</span><div><div class="st">Book a Free Discovery Call</div><p class="sd">A quick 15-minute conversation. Tell Justin your goals, your history, and what you've already tried. No pressure — just clarity on whether you're a good fit.</p></div></div>
+        <div class="proc-step reveal d1"><span class="sn">02</span><div><div class="st">Get Your Custom Plan</div><p class="sd">Within 48 hours of joining, Justin builds your program from scratch — a tailored workout schedule and, if you add meals, a personalized weekly menu built around your macros and dietary preferences.</p></div></div>
+        <div class="proc-step reveal d2"><span class="sn">03</span><div><div class="st">Show Up & Execute</div><p class="sd">Train in person, eat your prepared meals, and check in weekly so Justin can track your progress and adjust the plan. Your only job is to show up — everything else is handled.</p></div></div>
+        <div class="proc-step reveal d3"><span class="sn">04</span><div><div class="st">Track, Adjust, Repeat</div><p class="sd">Weekly check-ins keep the program evolving with your body. Hitting a plateau? Justin adjusts. Ahead of schedule? Justin pushes harder. The plan never gets stale.</p></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS -->
+<section id="results" class="s">
+  <div class="res-top">
+    <h2 class="res-hl reveal">The <em>Real</em><br>Results.</h2>
+    <p class="res-copy reveal d1">Placeholder transformations shown below. Real client photos and testimonials will be added before launch — with each client's written permission.</p>
+  </div>
+  <div class="res-grid">
+    <div class="res-card reveal"><div class="res-inner"><div class="res-ph"><div class="ph-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 16l5-5 4 4 3-3 6 6" stroke="currentColor" stroke-width="1.5"/></svg></div><span class="ph-t">Client Photo<br>Coming Soon</span></div><div class="res-ov"></div><span class="res-dur">12 Weeks</span><div class="res-info"><span class="res-name">Marcus T.</span><span class="res-detail">Lost 28 lbs · Built significant muscle</span></div></div></div>
+    <div class="res-card reveal d1"><div class="res-inner"><div class="res-ph"><div class="ph-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 16l5-5 4 4 3-3 6 6" stroke="currentColor" stroke-width="1.5"/></svg></div><span class="ph-t">Client Photo<br>Coming Soon</span></div><div class="res-ov"></div><span class="res-dur">8 Weeks</span><div class="res-info"><span class="res-name">Alicia R.</span><span class="res-detail">Body recomp · Leaned out 18 lbs</span></div></div></div>
+    <div class="res-card reveal d2"><div class="res-inner"><div class="res-ph"><div class="ph-ico"><svg width="26" height="26" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="1.5"/><circle cx="8.5" cy="8.5" r="2.5" stroke="currentColor" stroke-width="1.5"/><path d="M3 16l5-5 4 4 3-3 6 6" stroke="currentColor" stroke-width="1.5"/></svg></div><span class="ph-t">Client Photo<br>Coming Soon</span></div><div class="res-ov"></div><span class="res-dur">16 Weeks</span><div class="res-info"><span class="res-name">Derek W.</span><span class="res-detail">Muscle gain · +22 lbs lean mass</span></div></div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<div id="testi" class="sf">
+  <div class="testi-inner">
+    <div class="testi-hdr">
+      <div><div class="section-label reveal">Client Reviews</div><h2 class="testi-hl reveal">What They<br>Say.</h2></div>
+      <div class="testi-nav"><button class="tbtn" id="tprev" aria-label="Prev"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M13 4L7 10L13 16" stroke="currentColor" stroke-width="1.5"/></svg></button><button class="tbtn" id="tnext" aria-label="Next"><svg width="18" height="18" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="1.5"/></svg></button></div>
+    </div>
+    <div class="testi-track" id="ttrack">
+      <div class="tc reveal"><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="tq">"I've tried every gym program imaginable. What Justin does differently is he treats food and training as one system. By week 6 I had more energy than I've had in years, and by week 12 I looked completely different. The meals alone are worth it — I actually look forward to eating clean now."</p><div class="ta"><div class="tav">M</div><div><span class="tn">Marcus T.</span><span class="tp">Training + Meals Bundle · 12 weeks</span></div></div></div>
+      <div class="tc reveal d1"><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="tq">"Justin is the only trainer who actually explained why I was doing each exercise and how my meals connected to my workouts. The weekly check-ins kept me honest, and the meal delivery removed the biggest excuse I had. Down 18 pounds and I've kept it off."</p><div class="ta"><div class="tav">A</div><div><span class="tn">Alicia R.</span><span class="tp">Training + Meals Bundle · 8 weeks</span></div></div></div>
+      <div class="tc reveal d2"><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div><p class="tq">"I hired Justin specifically for the bulk. The meal prep was a game-changer — eating enough clean calories to build muscle without cooking every day is hard, and he solved that completely. Put on 22 lbs of solid muscle in 4 months."</p><div class="ta"><div class="tav">D</div><div><span class="tn">Derek W.</span><span class="tp">Training + Meals Bundle · 16 weeks</span></div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- MEALS -->
+<div id="meals">
+  <div class="meals-inner">
+    <div>
+      <div class="section-label reveal">Meal Prep & Delivery</div>
+      <h2 class="meals-hl reveal">Eat Like<br>an <span>Athlete.</span><br>Without the Work.</h2>
+      <p class="meals-p reveal d1">Every meal is designed around your macros and your training phase. High protein, whole ingredients, and enough variety that you actually enjoy eating clean. Prepared weekly, delivered fresh.</p>
+      <div class="meal-feats reveal d1">
+        <div class="mf"><div class="mf-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="currentColor" stroke-width="1.5"/></svg></div><div><span class="mf-t">Macro-Engineered Recipes</span><span class="mf-d">Every meal is built to your exact protein, carb, and fat targets based on your current training phase.</span></div></div>
+        <div class="mf"><div class="mf-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/><path d="M12 6V12L16 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></div><div><span class="mf-t">Weekly Fresh Delivery</span><span class="mf-d">Prepared and delivered on a set weekly schedule. Fresh every time — never frozen, never reheated twice.</span></div></div>
+        <div class="mf"><div class="mf-ico"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.5"/></svg></div><div><span class="mf-t">Dietary Restrictions Accommodated</span><span class="mf-d">Any dietary needs flagged during onboarding are built into your weekly menu automatically.</span></div></div>
+      </div>
+      <a href="#cta" class="btn-primary reveal d2">Add Meals to My Plan</a>
+    </div>
+    <div class="reveal">
+      <div class="meals-grid">
+        <div class="mc"><div class="mc-img"><img src="https://images.unsplash.com/photo-1547592180-85f173990554?w=800&q=80" alt="Grilled Chicken Bowl" loading="lazy"/><span class="mc-tag">High Protein</span></div><div class="mc-info"><span class="mc-name">Grilled Chicken & Brown Rice Bowl</span><div class="mc-macros"><span class="macro"><strong>52g</strong> Protein</span><span class="macro"><strong>65g</strong> Carbs</span><span class="macro"><strong>12g</strong> Fat</span><span class="macro"><strong>596</strong> Cal</span></div></div></div>
+        <div class="mc"><div class="mc-img"><img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=400&q=80" alt="Salmon & Roasted Veg" loading="lazy"/><span class="mc-tag">Low Carb</span></div><div class="mc-info"><span class="mc-name">Salmon & Roasted Veg</span><div class="mc-macros"><span class="macro"><strong>44g</strong> Protein</span><span class="macro"><strong>18g</strong> Carbs</span><span class="macro"><strong>22g</strong> Fat</span></div></div></div>
+        <div class="mc"><div class="mc-img"><img src="https://images.unsplash.com/photo-1544025162-d76538f4c8f2?w=400&q=80" alt="Steak Bowl" loading="lazy"/><span class="mc-tag">Bulk</span></div><div class="mc-info"><span class="mc-name">Steak, Sweet Potato & Eggs</span><div class="mc-macros"><span class="macro"><strong>58g</strong> Protein</span><span class="macro"><strong>80g</strong> Carbs</span><span class="macro"><strong>18g</strong> Fat</span></div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div id="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-inner">
+    <div class="cta-eye reveal">Limited Spots Available</div>
+    <h2 class="cta-hl reveal">Ready to<br>Start?</h2>
+    <p class="cta-sub reveal d1">Your first call is free. 15 minutes with Justin to talk through your goals and figure out exactly what it'll take to get there.</p>
+    <a href="mailto:placeholder@justinrobinson.com?subject=Discovery%20Call%20Request" class="btn-white reveal d2">Book My Free Call</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft">
+    <div class="ft-top">
+      <div>
+        <a href="#" class="ft-brand">JUSTIN<span>.</span></a>
+        <p class="ft-tag">In-person personal training and chef-prepared meal delivery for people serious about results. Based in Huntsville, Alabama.</p>
+        <div class="ft-social">
+          <a href="#" class="soc" aria-label="Instagram"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><rect x="2" y="2" width="20" height="20" rx="5" stroke="currentColor" stroke-width="1.5"/><circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" class="soc" aria-label="TikTok"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#" class="soc" aria-label="Facebook"><svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="1.5"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <span class="ft-col-lbl">Services</span>
+        <ul class="ft-links"><li><a href="#services">Personal Training</a></li><li><a href="#meals">Meal Prep</a></li><li><a href="#meals">Meal Delivery</a></li><li><a href="#services">Training + Meals Bundle</a></li></ul>
+      </div>
+      <div>
+        <span class="ft-col-lbl">Quick Links</span>
+        <ul class="ft-links"><li><a href="#about">About Justin</a></li><li><a href="#results">Client Results</a></li><li><a href="#testi">Testimonials</a></li><li><a href="#cta">Book a Call</a></li></ul>
+      </div>
+      <div>
+        <span class="ft-col-lbl">Contact</span>
+        <ul class="ft-links"><li><a href="mailto:placeholder@justinrobinson.com">placeholder@justinrobinson.com</a></li><li><a href="#">Huntsville, Alabama</a></li><li><a href="#cta">Book Discovery Call</a></li></ul>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span class="ft-legal">© 2026 Justin Robinson. All rights reserved. Placeholder — Final brand name TBD.</span>
+      <span class="ft-blt">Built by <span>Infinite Automationz</span></span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// NAV
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', scrollY > 60), { passive: true });
+
+// REVEAL
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.reveal, .reveal-l').forEach(el => io.observe(el));
+
+// ── GLSL HILLS (Three.js) ─────────────────────────────────────────────────
+(function() {
+  const canvas = document.getElementById('glsl-canvas');
+  if (!canvas || typeof THREE === 'undefined') return;
+
+  // ── Plane class with Perlin noise vertex shader ─────────────────────────
+  class Plane {
+    constructor() {
+      this.uniforms = { time: { type: 'f', value: 0 } };
+      this.mesh = this._createMesh();
+    }
+    _createMesh() {
+      const geo = new THREE.PlaneGeometry(256, 256, 256, 256);
+      const mat = new THREE.RawShaderMaterial({
+        uniforms: this.uniforms,
+        transparent: true,
+        vertexShader: `
+          #define GLSLIFY 1
+          attribute vec3 position;
+          uniform mat4 projectionMatrix;
+          uniform mat4 modelViewMatrix;
+          uniform float time;
+          varying vec3 vPosition;
+
+          mat4 rotateMatrixX(float r) {
+            return mat4(1,0,0,0, 0,cos(r),-sin(r),0, 0,sin(r),cos(r),0, 0,0,0,1);
+          }
+          vec3 mod289(vec3 x){return x-floor(x*(1./289.))*289.;}
+          vec4 mod289(vec4 x){return x-floor(x*(1./289.))*289.;}
+          vec4 permute(vec4 x){return mod289(((x*34.)+1.)*x);}
+          vec4 taylorInvSqrt(vec4 r){return 1.79284291400159-.85373472095314*r;}
+          vec3 fade(vec3 t){return t*t*t*(t*(t*6.-15.)+10.);}
+
+          float cnoise(vec3 P){
+            vec3 Pi0=floor(P),Pi1=Pi0+vec3(1.);
+            Pi0=mod289(Pi0);Pi1=mod289(Pi1);
+            vec3 Pf0=fract(P),Pf1=Pf0-vec3(1.);
+            vec4 ix=vec4(Pi0.x,Pi1.x,Pi0.x,Pi1.x);
+            vec4 iy=vec4(Pi0.yy,Pi1.yy);
+            vec4 iz0=Pi0.zzzz,iz1=Pi1.zzzz;
+            vec4 ixy=permute(permute(ix)+iy);
+            vec4 ixy0=permute(ixy+iz0),ixy1=permute(ixy+iz1);
+            vec4 gx0=ixy0*(1./7.),gy0=fract(floor(gx0)*(1./7.))-.5;
+            gx0=fract(gx0);
+            vec4 gz0=vec4(.5)-abs(gx0)-abs(gy0);
+            vec4 sz0=step(gz0,vec4(0.));
+            gx0-=sz0*(step(0.,gx0)-.5);gy0-=sz0*(step(0.,gy0)-.5);
+            vec4 gx1=ixy1*(1./7.),gy1=fract(floor(gx1)*(1./7.))-.5;
+            gx1=fract(gx1);
+            vec4 gz1=vec4(.5)-abs(gx1)-abs(gy1);
+            vec4 sz1=step(gz1,vec4(0.));
+            gx1-=sz1*(step(0.,gx1)-.5);gy1-=sz1*(step(0.,gy1)-.5);
+            vec3 g000=vec3(gx0.x,gy0.x,gz0.x),g100=vec3(gx0.y,gy0.y,gz0.y);
+            vec3 g010=vec3(gx0.z,gy0.z,gz0.z),g110=vec3(gx0.w,gy0.w,gz0.w);
+            vec3 g001=vec3(gx1.x,gy1.x,gz1.x),g101=vec3(gx1.y,gy1.y,gz1.y);
+            vec3 g011=vec3(gx1.z,gy1.z,gz1.z),g111=vec3(gx1.w,gy1.w,gz1.w);
+            vec4 norm0=taylorInvSqrt(vec4(dot(g000,g000),dot(g010,g010),dot(g100,g100),dot(g110,g110)));
+            g000*=norm0.x;g010*=norm0.y;g100*=norm0.z;g110*=norm0.w;
+            vec4 norm1=taylorInvSqrt(vec4(dot(g001,g001),dot(g011,g011),dot(g101,g101),dot(g111,g111)));
+            g001*=norm1.x;g011*=norm1.y;g101*=norm1.z;g111*=norm1.w;
+            float n000=dot(g000,Pf0),n100=dot(g100,vec3(Pf1.x,Pf0.yz));
+            float n010=dot(g010,vec3(Pf0.x,Pf1.y,Pf0.z)),n110=dot(g110,vec3(Pf1.xy,Pf0.z));
+            float n001=dot(g001,vec3(Pf0.xy,Pf1.z)),n101=dot(g101,vec3(Pf1.x,Pf0.y,Pf1.z));
+            float n011=dot(g011,vec3(Pf0.x,Pf1.yz)),n111=dot(g111,Pf1);
+            vec3 fxyz=fade(Pf0);
+            vec4 nz=mix(vec4(n000,n100,n010,n110),vec4(n001,n101,n011,n111),fxyz.z);
+            vec2 nyz=mix(nz.xy,nz.zw,fxyz.y);
+            return 2.2*mix(nyz.x,nyz.y,fxyz.x);
+          }
+
+          void main(void){
+            vec3 p=(rotateMatrixX(radians(90.))*vec4(position,1.)).xyz;
+            float s=sin(radians(p.x/128.*90.));
+            vec3 np=p+vec3(0.,0.,time*-30.);
+            float n1=cnoise(np*.08),n2=cnoise(np*.06),n3=cnoise(np*.4);
+            vec3 lp=p+vec3(0.,
+              n1*s*8.+n2*s*8.+n3*(abs(s)*2.+.5)+pow(s,2.)*40.,
+            0.);
+            vPosition=lp;
+            gl_Position=projectionMatrix*modelViewMatrix*vec4(lp,1.);
+          }
+        `,
+        fragmentShader: `
+          precision highp float;
+          #define GLSLIFY 1
+          varying vec3 vPosition;
+          void main(void){
+            float d=length(vPosition);
+            float opacity=(96.-d)/256.*.55;
+            /* tint toward red at the crest, gray at edges */
+            float redMix=clamp((80.-d)/60.,0.,1.);
+            vec3 color=mix(vec3(0.55),vec3(0.72,0.22,0.17),redMix*0.55);
+            gl_FragColor=vec4(color,opacity);
+          }
+        `
+      });
+      return new THREE.Mesh(geo, mat);
+    }
+    tick(dt) { this.uniforms.time.value += dt * 0.5; }
+  }
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: false, alpha: true });
+  renderer.setClearColor(0x000000, 0);
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 1, 10000);
+  camera.position.set(0, 16, 125);
+  camera.lookAt(new THREE.Vector3(0, 28, 0));
+
+  const plane = new Plane();
+  scene.add(plane.mesh);
+
+  const clock = new THREE.Clock();
+
+  function resize() {
+    renderer.setSize(innerWidth, innerHeight);
+    camera.aspect = innerWidth / innerHeight;
+    camera.updateProjectionMatrix();
+  }
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+
+  // Parallax on scroll
+  window.addEventListener('scroll', () => {
+    if (scrollY < innerHeight) canvas.style.transform = `translateY(${scrollY * .22}px)`;
+  }, { passive: true });
+
+  (function loop() {
+    plane.tick(clock.getDelta());
+    renderer.render(scene, camera);
+    requestAnimationFrame(loop);
+  })();
+})();
+
+// STAT COUNTERS
+const statsObs = new IntersectionObserver(entries => {
+  if (!entries[0].isIntersecting) return;
+  statsObs.disconnect();
+  document.querySelectorAll('.stat-num[data-target]').forEach((el, i) => {
+    const target = +el.dataset.target, suffix = el.dataset.suffix;
+    setTimeout(() => {
+      let s; const dur = 1100;
+      (function step(ts) {
+        if (!s) s = ts;
+        const p = Math.min((ts - s) / dur, 1);
+        const ease = 1 - Math.pow(1 - p, 3);
+        el.innerHTML = Math.floor(ease * target) + '<span>' + suffix + '</span>';
+        if (p < 1) requestAnimationFrame(step);
+      })(performance.now());
+    }, i * 200);
+  });
+}, { threshold: .5 });
+const statsEl = document.querySelector('.hero-stats');
+if (statsEl) statsObs.observe(statsEl);
+
+// TESTIMONIAL CAROUSEL
+const track = document.getElementById('ttrack');
+let slide = 0;
+function getVis() { return innerWidth < 768 ? 1 : 2; }
+function updateCarousel() {
+  const c = track.querySelector('.tc');
+  if (!c) return;
+  const w = c.getBoundingClientRect().width + 20;
+  track.style.transform = `translateX(-${slide * w}px)`;
+  track.style.transition = 'transform .6s cubic-bezier(0.16,1,0.3,1)';
+}
+const cards = track.querySelectorAll('.tc');
+document.getElementById('tprev').onclick = () => { slide = Math.max(0, slide - 1); updateCarousel(); };
+document.getElementById('tnext').onclick = () => { slide = Math.min(cards.length - getVis(), slide + 1); updateCarousel(); };
+
+// CARD TILT
+document.querySelectorAll('.srv-card, .tc').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const r = card.getBoundingClientRect();
+    const x = ((e.clientX - r.left) / r.width - .5) * 7;
+    const y = ((e.clientY - r.top) / r.height - .5) * 7;
+    card.style.transform = `perspective(900px) rotateY(${x}deg) rotateX(${-y}deg) translateY(-5px)`;
+  });
+  card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+});
+</script>
+</body>
+</html>

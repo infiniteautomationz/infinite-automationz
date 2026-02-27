@@ -1,0 +1,45 @@
+Justin Mockup Demo Flow
+
+1) Website hook
+- Start at hero and value proposition.
+- Point out the CTA hierarchy (Book a Free Call + secondary Explore Services).
+- Mention this is optimized for visitor to booked call.
+
+2) Social proof and system clarity
+- Scroll to Results + Testimonials.
+- Explain this section is structured to prove outcomes first.
+- Transition into How It Works to show process clarity.
+
+3) Conversion section
+- Open Book Your Strategy Call.
+- Show the built-in scheduler fallback UI and selected slot state chips.
+- Highlight this still presents cleanly even when embed availability changes.
+
+4) Lead capture path
+- Show Lead Capture form and Contact section.
+- Explain lower-intent visitors are captured without breaking flow.
+
+5) Admin CRM handoff
+- Navigate to /app.
+- Show dashboard KPIs and activity feed to explain operational visibility.
+
+6) Lead management
+- Navigate to /app/leads.
+- Show pipeline view and lead table.
+- Open a lead profile, then open Convert to Client modal.
+
+7) Client operations
+- Navigate to /app/clients and open a client profile.
+- Show intake context, assignment placeholders, and timeline.
+
+8) Fulfillment modules
+- Show /app/workouts and /app/meals.
+- Explain how program assignment and meal operations are represented.
+
+9) Revenue + reporting
+- Show /app/billing and /app/analytics.
+- Highlight failed payment alert, invoice view, and funnel/revenue visuals.
+
+10) Integrations and onboarding visibility
+- Show /app/settings and /app/onboarding.
+- Close with: website lead -> booking -> conversion -> onboarding -> ongoing client management.

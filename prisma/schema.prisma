@@ -1,0 +1,308 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(cuid())
+  email           String    @unique
+  passwordHash    String?
+  role            Role      @default(CLIENT)
+  firstName       String?
+  lastName        String?
+  displayName     String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  workspaces      Workspace[]
+  comments        Comment[]
+  internalNotes   InternalNote[]
+  messages        Message[]
+  notifications   Notification[]
+  activityLogs    ActivityLog[]
+  fileAssets      FileAsset[]
+  calendarEvents  CalendarEvent[] @relation("CalendarEventCreatedBy")
+  messageThreads  MessageThread[] @relation("MessageThreadCreatedBy")
+  portalPreference UserPortalPreference?
+  savedViews      SavedView[]
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+model Workspace {
+  id                    String    @id @default(cuid())
+  name                  String
+  stripeCustomerId      String?   @unique
+  stripeSubscriptionId  String?
+  stripeSubscriptionStatus String? // active, past_due, canceled, etc.
+  stripePriceId         String?   @map("stripePlanId")
+  stripeCurrentPeriodEnd DateTime?
+  stripeCanceledAt      DateTime?
+  billingLockReason     String?
+  lockedAt              DateTime?
+  adminNotes            String?   @db.Text
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  userId                String    @unique
+  user                  User      @relation(fields: [userId], references: [id])
+
+  serviceInstances      ServiceInstance[]
+  workItems             WorkItem[]
+  statusDefinitions     WorkItemStatusDefinition[]
+  activityLogs          ActivityLog[]
+  notifications         Notification[]
+  calendarEvents        CalendarEvent[]
+  messageThreads        MessageThread[]
+  fileAssets            FileAsset[]
+  savedViews            SavedView[]
+}
+
+model ServiceInstance {
+  id            String    @id @default(cuid())
+  workspaceId   String
+  moduleType    String    // e.g. SOCIAL, WEBSITE, RECEPTIONIST
+  configJson    String?   @db.Text // stores features like CHATBOT, LEAD_CAPTURE, etc.
+  isEnabled     Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  workspace     Workspace @relation(fields: [workspaceId], references: [id])
+}
+
+model WorkItem {
+  id              String    @id @default(cuid())
+  workspaceId     String
+  type            String    // social_post, website_change, receptionist_kb, support_ticket, etc.
+  status          String    @default("DRAFT") // Draft, Needs Review, Approved, Scheduled, Posted, Completed
+  title           String?
+  description     String?   @db.Text
+  dataJson        String?   @db.Text // platform, hashtags, platformUrls, out of scope flags, revision counts etc.
+  priority        String?   @default("NORMAL")
+  dueDate         DateTime?
+  scheduledAt     DateTime?
+  postedAt        DateTime?
+  isOutOfScope    Boolean   @default(false)
+  revisionCount   Int       @default(0)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  workspace       Workspace @relation(fields: [workspaceId], references: [id])
+  comments        Comment[]
+  internalNotes   InternalNote[]
+  attachments     Attachment[]
+  snapshots       ApprovalSnapshot[]
+  messageThreads  MessageThread[]
+  fileAssets      FileAsset[]
+  calendarEvents  CalendarEvent[] @relation("CalendarEventSourceWorkItem")
+  activityLogs    ActivityLog[]
+}
+
+model Comment {
+  id              String    @id @default(cuid())
+  content         String    @db.Text
+  isInternal      Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  workItemId      String
+  workItem        WorkItem  @relation(fields: [workItemId], references: [id], onDelete: Cascade)
+
+  authorId        String
+  author          User      @relation(fields: [authorId], references: [id])
+}
+
+model Attachment {
+  id              String    @id @default(cuid())
+  fileName        String
+  fileUrl         String
+  fileType        String?
+  fileSize        Int?
+  createdAt       DateTime  @default(now())
+
+  workItemId      String
+  workItem        WorkItem  @relation(fields: [workItemId], references: [id], onDelete: Cascade)
+}
+
+model ApprovalSnapshot {
+  id              String    @id @default(cuid())
+  timestamp       DateTime  @default(now())
+  snapshotData    String    @db.Text // snapshot of the approved content
+  approverId      String
+  
+  workItemId      String
+  workItem        WorkItem  @relation(fields: [workItemId], references: [id], onDelete: Cascade)
+}
+
+model WorkItemStatusDefinition {
+  id                String    @id @default(cuid())
+  workspaceId       String
+  workItemType      String
+  statusName        String
+  position          Int
+  isTerminal        Boolean   @default(false)
+  requiresApproval  Boolean   @default(false)
+  createdAt         DateTime  @default(now())
+  updatedAt         DateTime  @updatedAt
+
+  workspace         Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, workItemType, statusName])
+}
+
+model InternalNote {
+  id              String    @id @default(cuid())
+  content         String    @db.Text
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  workItemId      String
+  workItem        WorkItem  @relation(fields: [workItemId], references: [id], onDelete: Cascade)
+
+  authorId        String
+  author          User      @relation(fields: [authorId], references: [id])
+}
+
+model ActivityLog {
+  id              String    @id @default(cuid())
+  action          String
+  metadataJson    String?   @db.Text
+  createdAt       DateTime  @default(now())
+
+  workspaceId     String
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  workItemId      String?
+  workItem        WorkItem? @relation(fields: [workItemId], references: [id], onDelete: Cascade)
+
+  actorId         String?
+  actor           User?     @relation(fields: [actorId], references: [id])
+}
+
+model Notification {
+  id              String    @id @default(cuid())
+  type            String
+  title           String
+  message         String    @db.Text
+  link            String?
+  isRead          Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+
+  workspaceId     String
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  userId          String?
+  user            User?     @relation(fields: [userId], references: [id])
+}
+
+model CalendarEvent {
+  id              String    @id @default(cuid())
+  title           String
+  description     String?   @db.Text
+  startsAt        DateTime
+  endsAt          DateTime?
+  sourceType      String?
+  sourceId        String?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  workspaceId     String
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  sourceWorkItemId String?
+  sourceWorkItem  WorkItem? @relation("CalendarEventSourceWorkItem", fields: [sourceWorkItemId], references: [id], onDelete: SetNull)
+
+  createdById     String?
+  createdBy       User?     @relation("CalendarEventCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+}
+
+model MessageThread {
+  id              String    @id @default(cuid())
+  title           String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  workspaceId     String
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  workItemId      String?
+  workItem        WorkItem? @relation(fields: [workItemId], references: [id], onDelete: Cascade)
+
+  createdById     String?
+  createdBy       User?     @relation("MessageThreadCreatedBy", fields: [createdById], references: [id], onDelete: SetNull)
+
+  messages        Message[]
+}
+
+model Message {
+  id              String    @id @default(cuid())
+  content         String    @db.Text
+  isInternal      Boolean   @default(false)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  threadId        String
+  thread          MessageThread @relation(fields: [threadId], references: [id], onDelete: Cascade)
+
+  authorId        String
+  author          User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+}
+
+model FileAsset {
+  id              String    @id @default(cuid())
+  fileName        String
+  fileUrl         String
+  fileType        String?
+  fileSize        Int?
+  tagsJson        String?   @db.Text
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  workspaceId     String
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  workItemId      String?
+  workItem        WorkItem? @relation(fields: [workItemId], references: [id], onDelete: SetNull)
+
+  uploadedById    String?
+  uploadedBy      User?     @relation(fields: [uploadedById], references: [id], onDelete: SetNull)
+}
+
+model UserPortalPreference {
+  id                String   @id @default(cuid())
+  density           String   @default("balanced")
+  motionMode        String   @default("premium_restrained")
+  defaultLandingRoute String @default("/app")
+  mobileNavMode     String   @default("bottom_drawer")
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model SavedView {
+  id              String   @id @default(cuid())
+  routeKey        String
+  name            String
+  filterJson      String   @db.Text
+  isDefault       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  workspaceId     String
+  workspace       Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([workspaceId, userId, routeKey, name])
+  @@index([workspaceId, routeKey])
+}

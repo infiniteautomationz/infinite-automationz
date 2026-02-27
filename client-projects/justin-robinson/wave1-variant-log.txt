@@ -1,0 +1,47 @@
+Wave 1 Variant Log
+Project: Justin Robinson Website
+Canonical File: justin-robinson-website (2).html
+Scope: #process, #results, #testi
+
+Note
+- 21st.dev MCP generation was not executable from this Codex shell environment.
+- The implemented variants below follow the agreed variant directions and selection criteria from the plan.
+
+1) #process
+Chosen direction: Variant C (asymmetric grid + strong typographic rhythm)
+Why selected:
+- Stronger visual hierarchy for four steps without long linear scroll fatigue.
+- Better desktop-to-mobile collapse pattern (2x2 to single-column).
+- Supports bold redesign while preserving clarity.
+Key refinements:
+- Added sticky intro column with concise framing copy.
+- Converted step rows into elevated cards with large numeric anchors.
+- Tightened copy per step for faster scan.
+
+2) #results
+Chosen direction: Variant B/C blend (modular proof cards + typographic statement)
+Why selected:
+- Clear separation between headline, summary metrics, and case cards.
+- Better story flow from system metrics to individual outcomes.
+- Creates visual contrast from surrounding sections without changing global tokens.
+Key refinements:
+- Added metric rail (3 stat blocks) above cases.
+- Redesigned cards with split "Before/After" visual field placeholders.
+- Kept names/durations/outcomes concise and legible on mobile.
+
+3) #testi
+Chosen direction: Variant A/B blend (editorial tone with modular cards)
+Why selected:
+- Preserves slider behavior while modernizing card identity.
+- Higher visual depth and readability than previous flat testimonial blocks.
+- Maintains conversion confidence cues (stars, result tags, attribution).
+Key refinements:
+- Kept required JS hooks: #ttrack, #tprev, #tnext, .tc.
+- Added testimonial tags (duration/result/program type).
+- Increased typographic contrast and spacing for long quotes.
+
+Final checks performed
+- Preserved anchors: #process, #results, #testi.
+- Preserved reveal hooks in redesigned blocks.
+- Preserved testimonial carousel hooks and .tc card class.
+- Confirmed stylesheet brace balance after edits.
