@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Infinite Automationz
 
-## Getting Started
+Git-controlled production source for the Infinite Automationz website.
 
-First, run the development server:
+## Production site
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- Netlify site: `infinite-automationz-site`
+- Public URL: `https://infinite-automationz-site.netlify.app/`
+- Production source directory: `public/`
+- Netlify Functions directory: `functions/`
+
+## Deployment model
+
+This repository currently publishes a static site from `public/` with Netlify Functions from `functions/`.
+
+`netlify.toml`:
+
+```toml
+[build]
+  publish = "public"
+  functions = "functions"
+
+[functions]
+  directory = "functions"
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+No frontend build step is required for the production static site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Key routes
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- `/` — main Infinite Automationz landing page
+- `/individual-pricing/` — individual pricing page
+- `/.netlify/functions/ghl-lead` — GoHighLevel lead capture function
+- `/.netlify/functions/site-config` — public runtime config endpoint
 
-## Learn More
+## Local preview
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+python3 -m http.server 8080 --directory public
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Then open `http://127.0.0.1:8080`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Notes
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+The repo also contains older Next.js app/source experiments, templates, and client-project work. The current Netlify production path is intentionally the static `public/` tree unless/until the site is migrated into a maintained app build.

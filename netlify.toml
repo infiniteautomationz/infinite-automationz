@@ -1,11 +1,6 @@
 [build]
-  publish = "Justin Robinson"
+  publish = "public"
   functions = "functions"
 
 [functions]
   directory = "functions"
-
-[[redirects]]
-  from = "/"
-  to = "/justin-robinson-website%20(2).html"
-  status = 200

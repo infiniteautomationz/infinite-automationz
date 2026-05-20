@@ -4,31 +4,35 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
   <title>Infinite Automationz — AI Automation That Actually Works for Huntsville Businesses</title>
   <meta name="description"
     content="Engineer-built AI automation for Huntsville/Madison businesses. 24/7 AI receptionists, lead generation, social media automation. 30-day money-back guarantee. From $249/month." />
 
-  <!-- Distinctive Typography -->
+  <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="dns-prefetch" href="https://js.stripe.com">
+  <link rel="dns-prefetch" href="https://prod.spline.design">
+
+  <!-- Preload Spline scene for faster load -->
+  <link rel="preload" href="https://prod.spline.design/DnBRrX6bJiW1O3Ko/scene.splinecode" as="fetch" crossorigin>
+
+  <!-- Fonts -->
   <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500&f[]=general-sans@500,600,700&display=swap"
     rel="stylesheet">
-
-
-
-  <link rel="stylesheet" href="assets/css/main.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap"
     rel="stylesheet">
 
-  <!-- Stripe.js -->
-  <script src="https://js.stripe.com/v3/"></script>
-  <!-- Spline 3D Viewer -->
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- Spline Viewer -->
   <script type="module" src="https://unpkg.com/@splinetool/viewer@1.12.58/build/spline-viewer.js"></script>
+
+  <!-- Deferred Scripts -->
+  <script defer src="https://js.stripe.com/v3/"></script>
 </head>
 
 <body id="top">
@@ -98,41 +102,47 @@
   </div>
 
   <!-- Hero -->
-  <section class="hero">
-    <div class="hero-ultra" style="position:relative; overflow:hidden;">
+  <section class="hero" style="position:relative; height:60vh; min-height:400px; overflow:hidden; background:#0a0a0a;">
+    <!-- Prevent Spline scroll hijacking -->
+    <style>
+      body { overflow: auto !important; }
+    </style>
+    
+    <!-- Spline 3D Background -->
+    <spline-viewer 
+      id="heroSpline"
+      url="https://prod.spline.design/DnBRrX6bJiW1O3Ko/scene.splinecode"
+      background="transparent"
+      style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;">
+    </spline-viewer>
 
-      <!-- Spline 3D Background -->
-      <spline-viewer url="https://prod.spline.design/DnBRrX6bJiW1O3Ko/scene.splinecode"
-        style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none;"
-        loading="lazy"></spline-viewer>
+    <!-- Gradient overlay -->
+    <div style="position:absolute; top:0; left:0; width:100%; height:100%; z-index:1; background:radial-gradient(ellipse at 30% 50%, rgba(214,178,76,0.1) 0%, transparent 50%), radial-gradient(ellipse at 70% 30%, rgba(214,178,76,0.05) 0%, transparent 40%); pointer-events:none;"></div>
 
-      <!-- Hide "Built with Spline" badge -->
-      <script>
-        (function hideSpllineBadge() {
-          function injectHide(viewer) {
-            const tryHide = () => {
-              const root = viewer.shadowRoot;
-              if (!root) return;
-              const style = document.createElement('style');
-              style.textContent = '#logo { display:none !important; } a[href*="spline"] { display:none !important; }';
-              root.appendChild(style);
-            };
-            // Try immediately, then poll until the shadow root is ready
-            tryHide();
-            const interval = setInterval(() => {
-              tryHide();
-              if (viewer.shadowRoot && viewer.shadowRoot.querySelector('#logo') === null) return;
-              clearInterval(interval);
-            }, 200);
-            setTimeout(() => clearInterval(interval), 10000);
-          }
-          document.addEventListener('DOMContentLoaded', () => {
-            document.querySelectorAll('spline-viewer').forEach(injectHide);
-          });
-        })();
-      </script>
-
-    </div>
+    <!-- Hide Spline badge -->
+    <script>
+      (function() {
+        function hideBadge() {
+          const viewer = document.getElementById('heroSpline');
+          if (!viewer) return;
+          
+          const tryHide = () => {
+            const root = viewer.shadowRoot;
+            if (!root) return;
+            const style = document.createElement('style');
+            style.textContent = '#logo { display:none !important; } a[href*="spline"] { display:none !important; }';
+            root.appendChild(style);
+          };
+          
+          tryHide();
+          const interval = setInterval(tryHide, 200);
+          setTimeout(() => clearInterval(interval), 5000);
+        }
+        
+        document.addEventListener('DOMContentLoaded', hideBadge);
+        setTimeout(hideBadge, 1000);
+      })();
+    </script>
   </section>
 
   <!-- ── Booking Section ── -->
@@ -1886,8 +1896,7 @@
       </div>
 
       <div style="text-align:center; margin-top:40px;">
-        <a href="individual-pricing.html" class="btn btn-outline"
-          style="font-size: 1.1rem; padding: 16px 32px; display: inline-flex; align-items: center; gap: 8px;">
+        <a class='btn btn-outline' href='/individual-pricing' style='font-size: 1.1rem; padding: 16px 32px; display: inline-flex; align-items: center; gap: 8px;'>
           View Individual Services Pricing
           <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />

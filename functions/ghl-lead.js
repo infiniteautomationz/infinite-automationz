@@ -5,15 +5,6 @@ const jsonHeaders = {
   'Access-Control-Allow-Methods': 'POST, OPTIONS'
 };
 
-const validPrimaryGoals = new Set([
-  'lose_weight',
-  'build_muscle',
-  'general_fitness',
-  'other'
-]);
-
-const validMealInterest = new Set(['yes', 'no', 'tell_me_more']);
-
 const parseBody = (body) => {
   try {
     return JSON.parse(body || '{}');
@@ -26,6 +17,20 @@ const sanitizeString = (value) => {
   if (typeof value !== 'string') return '';
   return value.trim();
 };
+
+const splitName = (firstName, lastName, fullName) => {
+  const first = sanitizeString(firstName);
+  const last = sanitizeString(lastName);
+  if (first || last) return { firstName: first, lastName: last };
+
+  const parts = sanitizeString(fullName).split(/\s+/).filter(Boolean);
+  return {
+    firstName: parts[0] || '',
+    lastName: parts.slice(1).join(' ')
+  };
+};
+
+const validEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 exports.handler = async (event) => {
   if (event.httpMethod === 'OPTIONS') {
@@ -49,42 +54,33 @@ exports.handler = async (event) => {
     };
   }
 
-  const firstName = sanitizeString(payload.firstName);
-  const lastName = sanitizeString(payload.lastName);
+  const { firstName, lastName } = splitName(payload.firstName, payload.lastName, payload.fullName);
   const email = sanitizeString(payload.email);
   const phone = sanitizeString(payload.phone);
-  const primaryGoal = sanitizeString(payload.primaryGoal);
-  const mealInterest = sanitizeString(payload.mealInterest);
-  const referralSource = sanitizeString(payload.referralSource);
-  const sourceForm = sanitizeString(payload.sourceForm) || 'unknown';
-  const utm = payload.utm && typeof payload.utm === 'object' ? payload.utm : {};
+  const website = sanitizeString(payload.website);
+  const address = sanitizeString(payload.address);
+  const revenue = sanitizeString(payload.revenue);
+  const businessType = sanitizeString(payload.businessType);
+  const message = sanitizeString(payload.message);
 
-  if (!firstName || !lastName || !email || !phone || !primaryGoal || !mealInterest || !referralSource) {
+  if (!firstName || !email || !phone || !businessType || !message) {
     return {
       statusCode: 400,
       headers: jsonHeaders,
-      body: JSON.stringify({ error: 'Missing required fields' })
+      body: JSON.stringify({ error: 'Missing required lead fields' })
     };
   }
 
-  if (!validPrimaryGoals.has(primaryGoal)) {
+  if (!validEmail(email)) {
     return {
       statusCode: 400,
       headers: jsonHeaders,
-      body: JSON.stringify({ error: 'Invalid primaryGoal value' })
-    };
-  }
-
-  if (!validMealInterest.has(mealInterest)) {
-    return {
-      statusCode: 400,
-      headers: jsonHeaders,
-      body: JSON.stringify({ error: 'Invalid mealInterest value' })
+      body: JSON.stringify({ error: 'Invalid email address' })
     };
   }
 
   const apiKey = process.env.GHL_API_KEY;
-  const locationId = process.env.GHL_LOCATION_ID;
+  const locationId = process.env.GHL_LOCATION_ID || '43ttz135eUcQq32zMJUv';
 
   if (!apiKey || !locationId) {
     return {
@@ -101,21 +97,24 @@ exports.handler = async (event) => {
     Accept: 'application/json'
   };
 
+  const tags = [
+    'Website Lead',
+    'Infinite Automationz',
+    businessType && `industry_${businessType.toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_|_$/g, '')}`
+  ].filter(Boolean);
+
   const contactPayload = {
     firstName,
     lastName,
     email,
     phone,
     locationId,
-    source: 'Justin Robinson Website Lead',
-    tags: [
-      'Website Lead',
-      'Justin Robinson',
-      `goal_${primaryGoal}`,
-      `meal_${mealInterest}`,
-      `form_${sourceForm}`
-    ]
+    source: 'Infinite Automationz Website',
+    tags
   };
+
+  if (website) contactPayload.website = website;
+  if (address) contactPayload.address1 = address;
 
   try {
     const contactResponse = await fetch('https://services.leadconnectorhq.com/contacts/upsert', {
@@ -138,20 +137,16 @@ exports.handler = async (event) => {
 
     if (contactId) {
       const noteSections = [
-        'Website intake submission',
-        `Form context: ${sourceForm}`,
-        `Primary goal: ${primaryGoal}`,
-        `Meal prep interest: ${mealInterest}`,
-        `Referral source: ${referralSource}`
-      ];
-
-      const utmEntries = Object.entries(utm).filter(([, value]) => typeof value === 'string' && value.trim() !== '');
-      if (utmEntries.length) {
-        noteSections.push(
-          'UTM:',
-          ...utmEntries.map(([key, value]) => `${key}: ${value}`)
-        );
-      }
+        'Infinite Automationz website consultation request',
+        `Name: ${[firstName, lastName].filter(Boolean).join(' ')}`,
+        `Email: ${email}`,
+        `Phone: ${phone}`,
+        website && `Website: ${website}`,
+        address && `Address: ${address}`,
+        revenue && `Estimated monthly revenue: ${revenue}`,
+        businessType && `Business type: ${businessType}`,
+        message && `Automation priority: ${message}`
+      ].filter(Boolean);
 
       await fetch(`https://services.leadconnectorhq.com/contacts/${contactId}/notes`, {
         method: 'POST',
@@ -169,7 +164,7 @@ exports.handler = async (event) => {
           locationId,
           pipelineId: process.env.GHL_PIPELINE_ID,
           pipelineStageId: process.env.GHL_PIPELINE_STAGE_ID,
-          name: `${firstName} ${lastName}`.trim(),
+          name: `${[firstName, lastName].filter(Boolean).join(' ')} — Infinite Automationz Lead`,
           status: 'open'
         })
       });
