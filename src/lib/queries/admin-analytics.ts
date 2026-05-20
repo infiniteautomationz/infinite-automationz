@@ -18,13 +18,14 @@ const REVIEW_STATUSES = ['Needs Review', 'Needs Client Review', 'Client Review',
 const DONE_STATUSES = ['Completed', 'Posted', 'Final Delivered'];
 
 export async function getAdminAnalyticsSummary(workspaceId?: string): Promise<AdminAnalyticsSummaryDTO> {
-  const whereWorkspace = workspaceId ? { workspaceId } : {};
+  const whereWorkspace = workspaceId ? { id: workspaceId } : {};
+  const whereWorkItem = workspaceId ? { workspaceId } : {};
   const now = new Date();
 
   const [workspaces, allItems, pendingApprovals] = await Promise.all([
     prisma.workspace.findMany({ where: whereWorkspace, orderBy: { createdAt: 'asc' } }),
     prisma.workItem.findMany({
-      where: whereWorkspace,
+      where: whereWorkItem,
       select: {
         id: true,
         status: true,
@@ -35,7 +36,7 @@ export async function getAdminAnalyticsSummary(workspaceId?: string): Promise<Ad
       },
     }),
     prisma.workItem.findMany({
-      where: { ...whereWorkspace, status: { in: REVIEW_STATUSES } },
+      where: { ...whereWorkItem, status: { in: REVIEW_STATUSES } },
       select: { id: true, createdAt: true },
     }),
   ]);

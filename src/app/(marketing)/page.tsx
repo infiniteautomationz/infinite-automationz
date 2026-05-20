@@ -58,9 +58,10 @@ async function loadMarketingBody(): Promise<string> {
 }
 
 export default async function MarketingPage() {
+    let bodyContent: string;
+
     try {
-        const bodyContent = await loadMarketingBody();
-        return <div dangerouslySetInnerHTML={{ __html: bodyContent }} suppressHydrationWarning />;
+        bodyContent = await loadMarketingBody();
     } catch {
         return (
             <div className="min-h-screen flex items-center justify-center text-gray-500">
@@ -68,4 +69,6 @@ export default async function MarketingPage() {
             </div>
         );
     }
+
+    return <div dangerouslySetInnerHTML={{ __html: bodyContent }} suppressHydrationWarning />;
 }

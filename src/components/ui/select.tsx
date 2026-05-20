@@ -91,7 +91,7 @@ const SelectTrigger = React.forwardRef<HTMLDivElement, React.HTMLAttributes<HTML
 )
 SelectTrigger.displayName = "SelectTrigger"
 
-const SelectValue = () => null
+const SelectValue = (_props: { placeholder?: string }) => null
 const SelectContent = ({ children }: { className?: string; children: React.ReactNode }) => <>{children}</>
 SelectContent.displayName = "SelectContent"
 

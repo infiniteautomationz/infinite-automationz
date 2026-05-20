@@ -306,7 +306,7 @@ export function EventManager({
 
         <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
           <div className="sm:hidden">
-            <Select value={view} onValueChange={(value: "month" | "week" | "day" | "list") => setView(value)}>
+            <Select value={view} onValueChange={(value) => setView(value as "month" | "week" | "day" | "list")}>
               <SelectTrigger className="w-full">
                 <SelectValue />
               </SelectTrigger>
